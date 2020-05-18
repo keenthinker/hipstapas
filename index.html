@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha256-L/W5Wfqfa0sdBNIKN9cG6QA5F2qx4qICmU2VgLruv9Y=" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+            body {
+                font-family: 'Roboto Mono', monospace;
+                font-size: x-large;
+            }
+
+            .fly {
+            position: absolute;
+            top: -25px;
+            left: -125px;
+            font-size: x-large;
+            color: rgba(192, 61, 204, 0.219);
+            }
+        </style>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha256-WqU1JavFxSAMcLP2WIOI+GB2zWmShMI82mTpLDcqFUg=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
+        <script>
+
+            let maxHeight = $(window).height() - 100;
+            let maxWidth = $(window).width() - 100;
+
+            function getRandomInt(max) {
+                return Math.floor(Math.random() * Math.floor(max));
+            }
+    
+            $(document).ready(() => {
+                console.log("ready to rumble.");
+
+                var wordsCount = 10;
+                var wordsToFetch = [];
+                for (var i = 0; i <= wordsCount; i++) {
+                    wordsToFetch.push(fetch('https://hipstapas.dev/api', {
+                        method: "GET",
+                        mode: 'cors',
+                        headers: { 'Content-Type': 'application/json' }
+                    })
+                    .then(res => res.text())
+                    .then(data => data)
+                    .catch(err => console.error(err)));
+                }
+
+                Promise.all(wordsToFetch).then(words => {
+                    for (var i = 0; i < words.length; i++) {
+                        $(document.body).append('<span class="fly" id="s' + i + '">' + words[i] + '</span>');
+                        $('#s' + i)
+                        .css({left:  getRandomInt(maxWidth)})
+                        .animate({top: getRandomInt(maxHeight)}, getRandomInt(4000));
+                    }                    
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col mt-2 text-center">
+                    <img src="images/logo_white_250x90.png" />
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col mt-2 text-center">
+                    <a href="https://keenthinker.com/passwordasaservice" target="_blank" rel="noopener">Hipster Password Helper As A Service</a>👌
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col mt-2 text-center">
+                    📢Coming soon!
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
