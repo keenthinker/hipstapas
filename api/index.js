@@ -75,6 +75,7 @@ module.exports = (req, res) => {
     }
     //res.setHeader('Content-Type', 'application/json');
     res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-Id, Content-Type, Accept');
     res.status(200).send(generate({ 
       lengthMin: lmin, 
       lengthMax: lmax,
