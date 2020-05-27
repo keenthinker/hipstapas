@@ -1,2 +1,5 @@
 .vercel
 .ionide/symbolCache.db
+
+.fake
+.ionide
