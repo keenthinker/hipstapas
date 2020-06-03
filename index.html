@@ -7,7 +7,7 @@
 		<title>hipstapas.dev</title>
         
         <meta name="description" content="Create secure strings like a pro with the hipster password as a service." />
-		<meta name="keywords" content="saas,password,software as a service,hipstapas,hipster,service,cloud" />
+		    <meta name="keywords" content="saas,password,software as a service,hipstapas,hipster,service,cloud" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         
         <meta property="og:title" content="hipstapas.dev" />
@@ -16,84 +16,156 @@
         <meta property="og:url" content="https://hipstapas.dev/" />
         <meta property="og:type" content="website" />
 
-        
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha256-L/W5Wfqfa0sdBNIKN9cG6QA5F2qx4qICmU2VgLruv9Y=" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha256-aAr2Zpq8MZ+YA/D6JtRD3xtrwpEz2IqOS+pWD/7XKIw=" crossorigin="anonymous" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
+
         <style>
-            @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
-            body {
-                font-family: 'Roboto Mono', monospace;
-                font-size: x-large;
-            }
-
-            .fly {
-            position: absolute;
-            top: -25px;
-            left: -125px;
-            font-size: x-large;
-            color: rgba(192, 61, 204, 0.219);
-            }
-        </style>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha256-WqU1JavFxSAMcLP2WIOI+GB2zWmShMI82mTpLDcqFUg=" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
-        <script>
-
-            let maxHeight = $(window).height() - 100;
-            let maxWidth = $(window).width() - 100;
-
-            function getRandomInt(max) {
-                return Math.floor(Math.random() * Math.floor(max));
-            }
+          .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+          }
     
+          @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+              font-size: 3.5rem;
+            }
+          }
+        </style>
+        <!-- Custom styles for this template -->
+        <style>
+            main > .container {
+              padding: 60px 15px 0;
+              }
+          
+          .footer {
+            background-color: #f5f5f5;
+          }
+          
+          .footer > .container {
+            padding-right: 15px;
+            padding-left: 15px;
+          }
+          
+          code {
+            font-size: 80%;
+          }
+          
+          @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+                      body {
+                          font-family: 'Roboto Mono', monospace;
+                          font-size: x-large;
+                          color:rgb(62, 77, 218);
+                      }
+          
+          .bg-dark {
+              background-color: rgb(62, 77, 218) !important;
+          }
+          .footer {
+              background-color: rgb(100, 121, 218) !important; /* 3e4dda */
+          }
+    
+        </style>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.min.js" integrity="sha256-Xt8pc4G0CdcRvI0nZ2lRpZ4VHng0EoUDMlGcBSQ9HiQ=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
+        <script>    
             $(document).ready(() => {
                 console.log("ready to rumble.");
-
-                var wordsCount = 10;
-                var wordsToFetch = [];
-                for (var i = 0; i <= wordsCount; i++) {
-                    wordsToFetch.push(fetch('https://hipstapas.dev/api', {
-                        method: "GET",
-                        mode: 'cors',
-                        headers: { 'Content-Type': 'application/json' }
-                    })
-                    .then(res => res.text())
-                    .then(data => data)
-                    .catch(err => console.error(err)));
-                }
-
-                Promise.all(wordsToFetch).then(words => {
-                    for (var i = 0; i < words.length; i++) {
-                        $(document.body).append('<span class="fly" id="s' + i + '">' + words[i] + '</span>');
-                        $('#s' + i)
-                        .css({left:  getRandomInt(maxWidth)})
-                        .animate({top: getRandomInt(maxHeight)}, getRandomInt(4000));
-                    }                    
-                });
+                fetch("/api")
+                .then(r => r.text())
+                .then(d => $('#hipstapasInAction').text(d));
             });
         </script>
     </head>
-    <body>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col mt-2 text-center">
-                    <img src="images/logo_white_250x90.png" />
-                </div>
-            </div>
+    <body class="d-flex flex-column h-100">
+      <header>
+    <!-- <nav class="navbar navbar-expand-md navbar-dark bg-dark navbar-custom"> -->
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark navbar-custom">
+      <a class="navbar-brand" href="#">hipstapas<span style="color: #ff0000;">.</span>dev</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Start <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Documentation</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="#">Privacy</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="#">Imprint</a>
+          </li>
+        </ul>
+        <span class="navbar-text"><img src="images/logo_transparent_250x90.png" width="80%"></span>
+      </div>
+    </nav>
+  </header>
+  
+  <main role="main" class="flex-shrink-0">
+    
+          <div class="container">
+              <div class="row">
+                  <div class="col mt-2">
+                      <h1 class="mt-5">******** as a service👌</h1>
+                      <p>Create secure passwords with ease!</p>
+                  </div>
+                  <div class="col mt-5">
+                      <img class="img-fluid" src="images/undraw_safe_bnk7.svg">
+                  </div>
+              </div>
+          </div>
+          <div class="container">
+              <div class="row">
+                  <div class="col mt-2">
+                      <h1>Why trust an online service?</h1>
+                      <p>Because hipstapas<span style="color: #ff0000;">.</span>dev is:</p>
+                      <p>
+                          <ul>
+                              <li><span style="color: #ff0000;">T</span>ransparent (<a href="https://github.com/keenthinker/hipstapas" target="_blank" rel="noopener">open source</a>)</li>
+                              <li><span style="color: #ff0000;">R</span>eliable (<a href="https://vercel.com" target="_blank" rel="noopener">hosted in the cloud</a>)</li>
+                              <li><span style="color: #ff0000;">U</span>ser-friendly (0 <a href="https://hipstapas.dev/docs" target="_blank" rel="noopener">configuration</a> and it just <a href="https://hipstapas.dev/api" target="_blank" rel="noopener">works</a>)</li>
+                              <li><span style="color: #ff0000;">S</span>ecure (<a href="https://github.com/keenthinker/hipstapas" target="_blank" rel="noopener">no analytics and statistics</a>)</li>
+                              <li><span style="color: #ff0000;">T</span>rustworthy (<a href="https://github.com/keenthinker/hipstapas" target="_blank" rel="noopener">certified by the crowd</a>)</li>
+                          </ul>
+                      </p>
+                  </div>
+              </div>
+          </div>
+          <!-- <div class="container">
+              <div class="row">
+                  <div class="col mt-2">
+                      <h1>Want to stay in touch?</h1>
+                      <p>Newsletter ...</p>
+                  </div>
+              </div>
+          </div> -->
+          <div class="container">
+              <div class="row">
+                  <div class="col mt-2">
+                  </div>
+                  <div class="col mt-5"></div>
+              </div>
+          </div>
+  </main>
+  
+  <footer class="footer mt-auto py-3">
+    <div class="container">
+        <div class="col mt-2 text-left">
+          <span>🧔</span>
+          <span id="hipstapasInAction"></span>
+          <span>✨</span>
         </div>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col mt-2 text-center">
-                    <a href="https://keenthinker.com/passwordasaservice" target="_blank" rel="noopener">Hipster Password Helper As A Service</a>👌
-                </div>
-            </div>
-        </div>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col mt-2 text-center">
-                    📢Coming soon!
-                </div>
-            </div>
-        </div>
-    </body>
+    </div>
+  </footer>
+  </body>
+  
 </html>
