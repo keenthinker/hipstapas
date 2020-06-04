@@ -80,9 +80,24 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.min.js" integrity="sha256-Xt8pc4G0CdcRvI0nZ2lRpZ4VHng0EoUDMlGcBSQ9HiQ=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
         <script>    
-            $(document).ready(() => {
+            $(document).ready(async () => {
                 console.log("ready to rumble.");
-                fetch("/api")
+                var options = {
+                  min: 10,
+                  max: 15
+                };
+                var configuration = {
+                                      method: 'POST',
+                                      mode: 'cors', 
+                                      cache: 'no-cache', 
+                                      credentials: 'same-origin', 
+                                      headers: {
+                                        'Content-Type': 'application/json'
+                                      },
+                                      referrerPolicy: 'no-referrer',
+                                      body: JSON.stringify(options) 
+                };
+                await fetch("/api", configuration)
                 .then(r => r.text())
                 .then(d => $('#hipstapasInAction').text(d));
             });
@@ -90,7 +105,6 @@
     </head>
     <body class="d-flex flex-column h-100">
       <header>
-    <!-- <nav class="navbar navbar-expand-md navbar-dark bg-dark navbar-custom"> -->
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark navbar-custom">
       <a class="navbar-brand" href="#">hipstapas<span style="color: #ff0000;">.</span>dev</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -118,7 +132,7 @@
                       <h1 class="mt-5"><span class="redunderline">********</span> as a service👌</h1>
                       <p>Create secure passwords with ease!</p>
                   </div>
-                  <div class="col mt-5">
+                  <div class="col mt-4">
                       <img class="img-fluid" src="images/undraw_safe_bnk7.svg">
                   </div>
               </div>
@@ -130,11 +144,11 @@
                       <p>Because hipstapas<span style="color: #ff0000;">.</span>dev is:</p>
                       <p>
                           <ul>
-                              <li><span style="color: #ff0000;">T</span>ransparent (<a href="https://github.com/keenthinker/hipstapas" target="_blank" rel="noopener">open source</a>)</li>
-                              <li><span style="color: #ff0000;">R</span>eliable (<a href="https://vercel.com" target="_blank" rel="noopener">hosted in the cloud</a>)</li>
-                              <li><span style="color: #ff0000;">U</span>ser-friendly (0 <a href="https://hipstapas.dev/docs" target="_blank" rel="noopener">configuration</a> and it just <a href="https://hipstapas.dev/api" target="_blank" rel="noopener">works</a>)</li>
-                              <li><span style="color: #ff0000;">S</span>ecure (<a href="https://github.com/keenthinker/hipstapas" target="_blank" rel="noopener">no analytics, no cookies, no external references</a>)</li>
-                              <li><span style="color: #ff0000;">T</span>rustworthy (<a href="https://github.com/keenthinker/hipstapas" target="_blank" rel="noopener">certified by the crowd</a>)</li>
+                              <li><span style="color: #ff0000;">T</span>ransparent <span class="d-none d-xs-none d-md-inline d-lg-inline d-xl-inline">(<a href="https://github.com/keenthinker/hipstapas" target="_blank" rel="noopener">open source</a>)</span></li>
+                              <li><span style="color: #ff0000;">R</span>eliable <span class="d-none d-xs-none d-md-inline d-lg-inline d-xl-inline">(<a href="https://vercel.com" target="_blank" rel="noopener">hosted in the cloud</a>)</span></li>
+                              <li><span style="color: #ff0000;">U</span>ser-friendly <span class="d-none d-xs-none d-md-inline d-lg-inline d-xl-inline">(0 <a href="https://hipstapas.dev/docs" target="_blank" rel="noopener">configuration</a> and it just <a href="https://hipstapas.dev/api" target="_blank" rel="noopener">works</a>)</span></li>
+                              <li><span style="color: #ff0000;">S</span>ecure <span class="d-none d-xs-none d-md-inline d-lg-inline d-xl-inline">(<a href="https://github.com/keenthinker/hipstapas" target="_blank" rel="noopener">no analytics, no cookies</a>)</span></li>
+                              <li><span style="color: #ff0000;">T</span>rustworthy <span class="d-none d-xs-none d-md-inline d-lg-inline d-xl-inline">(<a href="https://github.com/keenthinker/hipstapas" target="_blank" rel="noopener">certified by the crowd</a>)</span></li>
                           </ul>
                       </p>
                   </div>
@@ -160,11 +174,11 @@
   <footer class="footer mt-auto py-3">
     <div class="container">
       <div class="row">
-        <div class="col">
+        <div class="col-sm-12 col-lg">
           <a href="#" class="link">Privacy</a>
           <a href="#" class="link">Imprint</a>
         </div>
-        <div class="col text-right">
+        <div class="col-sm-12 col-lg d-none d-sm-none d-xs-none d-md-none d-lg-inline d-xl-inline">
           <span>👉</span>
           <span id="hipstapasInAction" class="link"></span>
           <span>✨</span>
@@ -172,6 +186,7 @@
       </div>
     </div>
   </footer>
-  </body>
+
+</body>
   
 </html>

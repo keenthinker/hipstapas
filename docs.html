@@ -80,9 +80,24 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.min.js" integrity="sha256-Xt8pc4G0CdcRvI0nZ2lRpZ4VHng0EoUDMlGcBSQ9HiQ=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
         <script>    
-            $(document).ready(() => {
+            $(document).ready(async () => {
                 console.log("ready to rumble.");
-                fetch("/api")
+                var options = {
+                  min: 10,
+                  max: 15
+                };
+                var configuration = {
+                                      method: 'POST',
+                                      mode: 'cors', 
+                                      cache: 'no-cache', 
+                                      credentials: 'same-origin', 
+                                      headers: {
+                                        'Content-Type': 'application/json'
+                                      },
+                                      referrerPolicy: 'no-referrer',
+                                      body: JSON.stringify(options) 
+                };
+                await fetch("/api", configuration)
                 .then(r => r.text())
                 .then(d => $('#hipstapasInAction').text(d));
             });
@@ -124,11 +139,11 @@
   <footer class="footer mt-auto py-3">
     <div class="container">
       <div class="row">
-        <div class="col">
+        <div class="col-sm-12 col-lg">
           <a href="#" class="link">Privacy</a>
           <a href="#" class="link">Imprint</a>
         </div>
-        <div class="col text-right">
+        <div class="col-sm-12 col-lg d-none d-sm-none d-xs-none d-md-none d-lg-inline d-xl-inline">
           <span>👉</span>
           <span id="hipstapasInAction" class="link"></span>
           <span>✨</span>
@@ -136,6 +151,7 @@
       </div>
     </div>
   </footer>
+
   </body>
   
 </html>
