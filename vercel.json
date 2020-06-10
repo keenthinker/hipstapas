@@ -4,6 +4,6 @@
 		{ "src": "/index", "dest": "/index.html"},
 		{ "src": "/docs", "dest": "/docs.html"},
 		{ "src": "/privacy", "dest": "/privacy.html"},
-		{ "src": "/imprint", "dest": "/imprint.html"}
+		{ "src": "/contact", "dest": "/contact.html"}
 	]
 }
