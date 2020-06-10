@@ -100,6 +100,13 @@
                 await fetch("/api", configuration)
                 .then(r => r.text())
                 .then(d => $('#hipstapasInAction').text(d));
+
+                fetch('/api/legal')
+                .then(r => r.json())
+                .then(d => {
+                  $('#legalName').text(d.name);
+                  $('#legalAddress').text(d.address);
+                });
             });
         </script>
     </head>
@@ -137,8 +144,8 @@
                   <div class="col">
                       <h1 class="mt-5">Impressum</h1>
                       <h2>Angaben gemäß § 5 TMG</h2>
-                      <p>Pavel Neytchev</p>
-                      <p>Mühlstraße 11/2, 71691 Freiberg am Neckar, Germany</p>
+                      <p id="legalName"></p>
+                      <p id="legalAddress"></p>
                       <p>hello@hipstapas.dev</p>  
                   </div>
                   <div class="col mt-4">
