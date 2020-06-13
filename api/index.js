@@ -1,7 +1,11 @@
-function randomNumber(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min; 
+const crypto = require('crypto');
+
+function randomNumber(min, max) {  
+  var maxDecimal = 281474976710656;   // 2^48
+  var randomBytesBuffer = crypto.randomBytes(6);  // 6 bytes * 8 bits = 48 
+  var randomBytes = parseInt(randomBytesBuffer.toString('hex'), 16);
+  var randomNumberInRange = Math.floor(randomBytes / maxDecimal * (max - min + 1) + min);
+  return randomNumberInRange;
 }
 
 function randomCharacter(alphabet) {
@@ -26,7 +30,7 @@ function calculateLowerAndUpperBound(lmin, lmax) {
   else if ((minLength <= 0) && (maxLength > 0))
   {
     lowerBound = randomNumber(1, maxLength);
-    upperBound = randomNumber(lowerBound, maxLength + 1);
+    upperBound = randomNumber(lowerBound, maxLength);
   }
   else if ((minLength > 0) && (maxLength <= 0))
   {
@@ -35,8 +39,8 @@ function calculateLowerAndUpperBound(lmin, lmax) {
   }
   else
   {
-    lowerBound = randomNumber(minLength, maxLength + 1);
-    var max = Math.max(lowerBound, maxLength + 1);
+    lowerBound = randomNumber(minLength, maxLength);
+    var max = Math.max(lowerBound, maxLength);
     upperBound = randomNumber(lowerBound, max);
   }
 

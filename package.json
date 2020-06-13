@@ -10,9 +10,18 @@
     "type": "git",
     "url": "git+https://github.com/keenthinker/hipstapas.git"
   },
-  "keywords": [],
+  "dependencies": {
+    "uuid": "^8.1.0"
+  },
+  "keywords": [
+    "saas",
+    "hipstapas",
+    "password",
+    "uuid",
+    "wordlist"
+  ],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/keenthinker/hipstapas/issues"
   },
