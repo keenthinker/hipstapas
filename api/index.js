@@ -1,18 +1,12 @@
-const crypto = require('crypto');
+import { randomNumber, randomCharacter } from '../modules/random.js';
 
-function randomNumber(min, max) {  
-  var maxDecimal = 281474976710656;   // 2^48
-  var randomBytesBuffer = crypto.randomBytes(6);  // 6 bytes * 8 bits = 48 
-  var randomBytes = parseInt(randomBytesBuffer.toString('hex'), 16);
-  var randomNumberInRange = Math.floor(randomBytes / maxDecimal * (max - min + 1) + min);
-  return randomNumberInRange;
-}
-
-function randomCharacter(alphabet) {
-  let position = randomNumber(0, alphabet.length);
-  return alphabet[position];
-}
-
+/**
+ * Validates and calculates the upper and the lower bound for the generator function 
+ * regarding the specified min and max values
+ * @param {!number} lmin 
+ * @param {!number} lmax
+ * @return {{ lower: !number, upper: !number }} 
+ */
 function calculateLowerAndUpperBound(lmin, lmax) {
   let randomUpperBound = 251;
   
@@ -47,6 +41,10 @@ function calculateLowerAndUpperBound(lmin, lmax) {
   return { "lower": lowerBound, "upper": upperBound };
 }
 
+/**
+ * Generates a random string considering the specified options
+ * @param {Object} options 
+ */
 function generate(options) {
   let lmin = options.lengthMin;
   let lmax = options.lengthMax;
