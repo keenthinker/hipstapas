@@ -136,12 +136,13 @@
               <div class="row">
                   <div class="col">
                       <h1 class="mt-5">API Documentation</h1>
-                      <p>1. The API</p>
+                      <p>1. The default API (passwords)</p>
                       <p>2. Using GET or POST?</p>
                       <p>3. Generation options</p>
                       <p>4. Generating UUID</p>
                       <p>5. EFF wordlist</p>
                       <p>6. Custom policy</p>
+                      <p>7. API definition (OpenAPI / Swagger)</p>
                   </div>
                   <div class="col mt-4">
                       <img class="img-fluid" src="images/undraw_File_bundle_xl7g.svg">
@@ -152,12 +153,14 @@
           <div class="container">
             <div class="row">
                 <div class="col">
-                    <h2>1. The API</h2>
+                    <h2>1. The default API (passwords)</h2>
                     <p>The easiest way to generate a strong phrase is to call the API - just call <a href="https://hipstapas.dev/api" target="_blank" rel="noopener">https://hipstapas.dev/api</a> to have a new password. That's it! You just created a password using the default options.</p>
                     <h2>4. Generating UUID</h2>
                     <p>Call <a href="https://hipstapas.dev/api/uuid" target="_blank" rel="noopener">https://hipstapas.dev/api/uuid</a> to have a new uuid. That's it! Currently only the http GET verb is supported.</p>
                     <h2>5. EFF wordlist</h2>
-                    <p>Work in progress.</p>
+                    <p>Call <a href="https://hipstapas.dev/api/wordlist" target="_blank" rel="noopener">https://hipstapas.dev/api/wordlist</a> to create a passphrase from 6 words (as described and suggested by EFF <a href="https://www.eff.org/de/dice">https://www.eff.org/de/dice</a>). 
+                      This is the default option. The count of the generated words can be set between <em>1</em> and <em>50</em> using the query parameter <em><b>words</b></em>, 
+                      e.g. <a href="https://hipstapas.dev/api/wordlist?words=3" target="_blank" rel="noopener">https://hipstapas.dev/api/wordlist/?words=3</a>.</p>
                 </div>
             </div>
         </div>
