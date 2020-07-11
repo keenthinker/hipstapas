@@ -63,12 +63,30 @@ function generate(options) {
   let lengthMin = options.lengthMin;
   let lengthMax = options.lengthMax;
   let resultsCount = options.resultsCount;
+  let includeAlphabetSmall = options.alphabetSmall;
+  let includeAlphabetCapital = options.alphabetCapital;
+  let includeAlphabetNumber = options.alphabetNumber;
+  let includeAlphabetSpecial = options.alphabetSpecial;
 
   let alphabetSmall = "abcdefghijklmnopqrstuvwxyz";
   let alphabetCapital = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  let alphabetNumbers = "0123456789";
+  let alphabetNumber = "0123456789";
   let alphabetSpecial = ".,+-*/!?;:{}()[]%$&~#@|";
-  let alphabet = alphabetSmall + alphabetCapital + alphabetNumbers + alphabetSpecial;
+
+  let alphabet = "";
+  
+  if (includeAlphabetSmall) {
+    alphabet += alphabetSmall;
+  }
+  if (includeAlphabetCapital) {
+    alphabet += alphabetCapital;
+  }
+  if (includeAlphabetNumber) {
+    alphabet += alphabetNumber;
+  }
+  if (includeAlphabetSpecial) {
+    alphabet += alphabetSpecial;
+  }
 
   let passPhrases = [];
   for (let count = 0; count < resultsCount; count++) {
@@ -78,12 +96,19 @@ function generate(options) {
   return passPhrases;
 }
 
-function validate(v, vr, cb) {
+/**
+ * Validator function
+ * @param {*} v value
+ * @param {*} c converter function 
+ * @param {*} vr validation rules
+ * @param {*} cb callback
+ */
+function validate(v, c, vr, cb) {
   // check if parameter is set
   if (v) {
     let validationOk = false;
     let errorMessage = "";
-    let value = Number(v);
+    let value = c(v);
     for (let i = 0; i < vr.rules.length; i++) {
       let rm = vr.rules[i];
       validationOk = rm.check(value);
@@ -109,16 +134,15 @@ module.exports = (req, res) => {
     let resultsCount = 1;
     let lengthMin = 16;
     let lengthMax = 32;
-    // if (req.body) {
-    //   lengthMin = req.body.lengthMin || 16;
-    //   lengthMax = req.body.lengthMax || 32;
-    //   resultsCount = req.body.resultsCount || 1;
-    // }
-    // query validation - todo: use npm jsonschema
+    let alphabetSmall = true;
+    let alphabetCapital = true;
+    let alphabetNumber = true;
+    let alphabetSpecial = true;
+
     if (req.query) {
       if (req.query !== undefined && JSON.stringify(req.query) !== '{}') {
-        //console.log(req.query);
-        var validateLengthMin = validate(req.query.lengthMin, {
+        
+        var validateLengthMin = validate(req.query.lengthMin, Number, {
           rules: [
             {
               "check": function (v) { return Number.isInteger(v); },
@@ -131,7 +155,7 @@ module.exports = (req, res) => {
           ]
         }, (r) => lengthMin = r);
 
-        var validateLengthMax = validate(req.query.lengthMax, {
+        var validateLengthMax = validate(req.query.lengthMax, Number, {
           rules: [
             {
               "check": function (v) { return Number.isInteger(v); },
@@ -144,7 +168,7 @@ module.exports = (req, res) => {
           ]
         }, (r) => lengthMax = r);
 
-        var validateResultsCount = validate(req.query.resultsCount, {
+        var validateResultsCount = validate(req.query.resultsCount, Number, {
           rules: [
             {
               "check": function (v) { return Number.isInteger(v); },
@@ -156,6 +180,42 @@ module.exports = (req, res) => {
             }
           ]
         }, (r) => resultsCount = r);
+
+        var validateAlphabetSmall = validate(req.query.alphabetSmall, String, {
+          rules: [
+            {
+              "check": function (v) { return (v.toLowerCase() == "true") || (v.toLowerCase() == "false"); },
+              "message": "Query parameter value should be either 'true' or 'false'. Example: https://hipstapas.dev/api/?alphabetSmall=true"  
+            }
+          ]
+        }, (r) => alphabetSmall = r.toLowerCase() === "true");
+
+        var validateAlphabetCapital = validate(req.query.alphabetCapital, String, {
+          rules: [
+            {
+              "check": function (v) { return (v.toLowerCase() == "true") || (v.toLowerCase() == "false"); },
+              "message": "Query parameter value should be either 'true' or 'false'. Example: https://hipstapas.dev/api/?alphabetCapital=true"  
+            }
+          ]
+        }, (r) => alphabetCapital = r.toLowerCase() === "true");
+
+        var validateAlphabetNumber = validate(req.query.alphabetNumber, String, {
+          rules: [
+            {
+              "check": function (v) { return (v.toLowerCase() == "true") || (v.toLowerCase() == "false"); },
+              "message": "Query parameter value should be either 'true' or 'false'. Example: https://hipstapas.dev/api/?alphabetNumber=true"  
+            }
+          ]
+        }, (r) => alphabetNumber = r.toLowerCase() === "true");
+
+        var validateAlphabetSpecial = validate(req.query.alphabetSpecial, String, {
+          rules: [
+            {
+              "check": function (v) { return (v.toLowerCase() == "true") || (v.toLowerCase() == "false"); },
+              "message": "Query parameter value should be either 'true' or 'false'. Example: https://hipstapas.dev/api/?alphabetSpecial=true"  
+            }
+          ]
+        }, (r) => alphabetSpecial = r.toLowerCase() === "true");
 
         if (!validateLengthMin.success) {
           res.status(200).send(validateLengthMin.error);
@@ -171,6 +231,26 @@ module.exports = (req, res) => {
           res.status(200).send(validateResultsCount.error);
           return;
         }
+
+        if (!validateAlphabetSmall.success) {
+          res.status(200).send(validateAlphabetSmall.error);
+          return;
+        }
+
+        if (!validateAlphabetCapital.success) {
+          res.status(200).send(validateAlphabetCapital.error);
+          return;
+        }
+
+        if (!validateAlphabetNumber.success) {
+          res.status(200).send(validateAlphabetNumber.error);
+          return;
+        }
+
+        if (!validateAlphabetSpecial.success) {
+          res.status(200).send(validateAlphabetSpecial.error);
+          return;
+        }
       }
     }
     //res.setHeader('Content-Type', 'application/json');
@@ -179,7 +259,11 @@ module.exports = (req, res) => {
     let results = generate({ 
       lengthMin: lengthMin, 
       lengthMax: lengthMax,
-      resultsCount: resultsCount
+      resultsCount: resultsCount,
+      alphabetSmall: alphabetSmall,
+      alphabetCapital: alphabetCapital,
+      alphabetNumber: alphabetNumber,
+      alphabetSpecial: alphabetSpecial
      });
     res.status(200).send(results.length == 1 ? results[0] : results);
   }
