@@ -137,7 +137,7 @@
                   <div class="col">
                       <h1 class="mt-5">API Documentation</h1>
                       <p>1. The default API (passwords)</p>
-                      <p>2. Using GET or POST?</p>
+                      <p>2. Supported HTTP methods</p>
                       <p>3. Generation options</p>
                       <p>4. Generating UUID</p>
                       <p>5. EFF wordlist</p>
@@ -154,9 +154,32 @@
             <div class="row">
                 <div class="col">
                     <h2>1. The default API (passwords)</h2>
-                    <p>The easiest way to generate a strong phrase is to call the API - just call <a href="https://hipstapas.dev/api" target="_blank" rel="noopener">https://hipstapas.dev/api</a> to have a new password. That's it! You just created a password using the default options.</p>
+                    <p>The easiest way to generate a strong phrase is to call the API - just call <a href="https://hipstapas.dev/api" target="_blank" rel="noopener">https://hipstapas.dev/api</a> to have a new password. That's it! You just created a password using the default options (alphabet consists of small, capital, numbers and special charactes, min. length is 16 and max. length is 32 characters).
+                    Options: 
+                    <ul>
+                      <li>alphabetSmall = true|false</li>
+                      <li>alphabetCapital = true|false</li>
+                      <li>alphabetNumber = true|false</li>
+                      <li>alphabetSpecial = true|false</li>
+                      <li>lengthMin = number between 1 and 2048</li>
+                      <li>lengthMax = number between 1 and 2048</li>
+                      <li>resultsCount = number between 1 and 100</li>
+                    </ul>
+                    Example to: 
+                    <ul>
+                      <li>generate 5 phrases at once</li>
+                      <li>where each phrase is exactly 5 characters long</li>
+                      <li>using only small characters and numbers</li>
+                    </ul>
+                    <a href="https://hipstapas.dev/api?lengthMin=5&lengthMax=5&resultsCount=5&alphabetSpecial=false&alphabetCapital=false" target="_blank" rel="noopener">
+                      https://hipstapas.dev/api?resultsCount=5&lengthMin=5&lengthMax=5&alphabetSpecial=false&alphabetCapital=false</a>.
+                    </p>
+                    <h2>2. Supported HTTP methods</h2>
+                    <p>Currently all API endpoints are supporting only the HTTP GET method. Accepting HTTP POST is work in progress. Base API URL is <em>https://hipstapas.dev/api</em>.</p>
+                    <h2>3. Generation options</h2>
+                    <p>Because there are only GET methods, all options should be set using query parameters. Currently every endpoint supports a <em>resultsCount</em> query parameter, that controls how many items are returned at once. Example: <a href="https://hipstapas.dev/api/?resultsCount=5" target="_blank" rel="noopener">https://hipstapas.dev/api/?resultsCount=5</a> generates 5 phrases at once and returns an array containing the newly generated strings. For query parameters of type boolean that are not explicitely specified, <em>true</em> is always the default option.</p>
                     <h2>4. Generating UUID</h2>
-                    <p>Call <a href="https://hipstapas.dev/api/uuid" target="_blank" rel="noopener">https://hipstapas.dev/api/uuid</a> to have a new uuid. That's it! Currently only the http GET verb is supported.</p>
+                    <p>Call <a href="https://hipstapas.dev/api/uuid" target="_blank" rel="noopener">https://hipstapas.dev/api/uuid</a> to have a new uuid. That's it!</p>
                     <h2>5. EFF wordlist</h2>
                     <p>Call <a href="https://hipstapas.dev/api/wordlist" target="_blank" rel="noopener">https://hipstapas.dev/api/wordlist</a> to create a passphrase from 6 words (as described and suggested by EFF <a href="https://www.eff.org/de/dice">https://www.eff.org/de/dice</a>). 
                       This is the default option. The count of the generated words can be set between <em>1</em> and <em>50</em> using the query parameter <em><b>words</b></em>, 

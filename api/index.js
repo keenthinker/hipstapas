@@ -1,4 +1,5 @@
 import { randomNumber, randomCharacter } from '../modules/random.js';
+import { validate } from '../modules/validator.js';
 
 /**
  * Validates and calculates the upper and the lower bound for the generator function 
@@ -94,40 +95,6 @@ function generate(options) {
   }
 
   return passPhrases;
-}
-
-/**
- * Validator function
- * @param {*} v value
- * @param {*} c converter function 
- * @param {*} vr validation rules
- * @param {*} cb callback
- */
-function validate(v, c, vr, cb) {
-  // check if parameter is set
-  if (v) {
-    let validationOk = false;
-    let errorMessage = "";
-    let value = c(v);
-    for (let i = 0; i < vr.rules.length; i++) {
-      let rm = vr.rules[i];
-      validationOk = rm.check(value);
-      if (!validationOk) {
-        errorMessage = rm.message;
-        break;
-      } 
-    }
-    cb(value);
-    return {
-      "success": validationOk,
-      "error": errorMessage
-    };
-  }
-  // if parameter is not set, then pass
-  return {
-    "success": true,
-    "error": ""
-  };
 }
 
 module.exports = (req, res) => {
