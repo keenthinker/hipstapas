@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        
+		<title>hipstapas.dev</title>
+        
+        <meta name="description" content="Create secure strings like a pro with the hipster password as a service." />
+		<meta name="keywords" content="saas,password,software as a service,hipstapas,hipster,service,cloud" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
+        <meta property="og:title" content="hipstapas.dev" />
+        <meta property="og:description" content="Create secure strings like a pro with the hipster password as a service." />
+        <meta property="og:image" content="https://hipstapas.dev/images/logo_white_250x90.png" />
+        <meta property="og:url" content="https://hipstapas.dev/" />
+        <meta property="og:type" content="website" />
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha256-aAr2Zpq8MZ+YA/D6JtRD3xtrwpEz2IqOS+pWD/7XKIw=" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
+        <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+
+        <style>
+          .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+          }
+    
+          @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+              font-size: 3.5rem;
+            }
+          }
+        </style>
+        <style>
+            main > .container {
+              padding: 60px 15px 0;
+              }
+          
+          .footer {
+            background-color: #f5f5f5;
+          }
+          
+          .footer > .container {
+            padding-right: 15px;
+            padding-left: 15px;
+          }
+
+          .footer .link {
+            color: #fff;
+          }
+          
+          code {
+            font-size: 80%;
+          }
+          
+          @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+                      body {
+                          font-family: 'Roboto Mono', monospace;
+                          font-size: x-large;
+                          color:rgb(62, 77, 218);
+                      }
+          
+          .bg-dark {
+              background-color: rgb(62, 77, 218) !important;
+          }
+          .footer {
+              background-color: rgb(62, 77, 218) !important; /* 3e4dda */
+          }
+    
+          .redunderline {
+            border-bottom: 0.1em solid #ff0000;
+          }
+        </style>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.min.js" integrity="sha256-Xt8pc4G0CdcRvI0nZ2lRpZ4VHng0EoUDMlGcBSQ9HiQ=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
+        <script>
+            function rangeMinLengthChange(v)
+            {
+                $('#minLengthRangeValue').text(v);
+            }
+            function rangeMaxLengthChange(v)
+            {
+                $('#maxLengthRangeValue').text(v);
+            }
+
+            $(document).ready(async () => {
+                console.log("ready to rumble.");
+
+                rangeMinLengthChange(10);
+                rangeMaxLengthChange(30);
+
+                $('#generate').click(function() {
+                    let includeSmallCharacters = $('#checkSmallCharacters').prop("checked");
+                    let includeCapitalCharacters = $('#checkCapitalCharacters').prop("checked");
+                    let includeNumbers = $('#checkNumbers').prop("checked");
+                    let includeSpecialCharacters = $('#checkSpecialCharacters').prop("checked");
+                    let lengthMin = Number($('#minLengthRangeValue').text());
+                    let lengthMax = Number($('#maxLengthRangeValue').text());
+
+                    let queryPassword = `/api/?alphabetSmall=${includeSmallCharacters}&alphabetCapital=${includeCapitalCharacters}&alphabetNumber=${includeNumbers}&alphabetSpecial=${includeSpecialCharacters}&lengthMin=${lengthMin}&lengthMax=${lengthMax}&resultsCount=1`;
+                    
+                    console.log(queryPassword);
+
+                    fetch(queryPassword)
+                    .then(function(res){
+                        return res.text();
+                    })
+                    .then(function(data) {
+                            console.log(data);
+                            $('#chbs').val(data);
+                        })
+                    .catch(function(err) { console.error(err);});
+                });
+
+            });
+        </script>
+    </head>
+    <body class="d-flex flex-column h-100">
+      <header>
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark navbar-custom">
+      <a class="navbar-brand" href="/">hipstapas<span style="color: #ff0000;">.</span>dev</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Start <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/docs">Documentation</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="">Playground</a>
+          </li>
+          <li>
+            <a class="nav-link" href="https://github.com/keenthinker/hipstapas" target="_blank" rel="noopener">Source</a>
+          </li>
+        </ul>
+        <span class="navbar-text"><img src="images/logo_transparent_250x90.png" width="80%"></span>
+      </div>
+    </nav>
+  </header>
+  
+  <main role="main" class="flex-shrink-0">
+    
+          <div class="container">
+              <div class="row">
+                  <div class="col">
+                      <h1 class="mt-5">Welcome to the hipstapas<span style="color: #ff0000;">.</span>dev playground.</h1>
+                      <p>Explore the API features and see the result instantly without writing any code.</p>
+                  </div>
+                  <div class="col-4 mt-4">
+                      <img class="img-fluid" src="images/undraw_control_panel1_20gm.svg">
+                  </div>
+              </div>
+          </div>
+
+          <div class="container">
+            <div class="row">
+                <div class="col mt-2">
+                    <div class="form-group">
+                      <input type="text" readonly class="form-control" id="chbs">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <button href="#" id="generate" class="btn btn-primary btn-lg btn-block" type="button">Generate</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col mt-2">
+                    <form>
+                        <div class="form-group">
+                          <label for="formControlRange">Length (min): <span id="minLengthRangeValue"></span></label>
+                          <input 
+                            type="range" 
+                            min="1"
+                            max="100"
+                            step="1"
+                            value="10"
+                            class="form-control-range" 
+                            id="rangeMinLength" 
+                            onchange="rangeMinLengthChange(value)">
+                        </div>
+                      </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col mt-2">
+                    <form>
+                        <div class="form-group">
+                          <label for="formControlRange">Length (max): <span id="maxLengthRangeValue"></span></label>
+                          <input 
+                            type="range" 
+                            min="1"
+                            max="100"
+                            step="1"
+                            value="30"
+                            class="form-control-range" 
+                            id="rangeMaxLength" 
+                            onchange="rangeMaxLengthChange(value)">
+                        </div>
+                      </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col mt-2">
+                    <input type="checkbox" id="checkSmallCharacters" checked data-toggle="toggle" data-offstyle="dark" data-on="Yes" data-off="No">
+                    <span>include small characters</span>
+                    <span class="badge badge-light">abcdefghijklmnopqrstuvwxyz</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col mt-2">
+                    <input type="checkbox" id="checkCapitalCharacters" checked data-toggle="toggle" data-offstyle="dark" data-on="Yes" data-off="No">
+                    <span>include capital characters</span>
+                    <span class="badge badge-light">ABCDEFGHIJKLMNOPQRSTUVWXYZ</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col mt-2">
+                    <input type="checkbox" id="checkNumbers" checked data-toggle="toggle" data-offstyle="dark" data-on="Yes" data-off="No">
+                    <span>include numbers</span>
+                    <span class="badge badge-light">0123456789</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col mt-2 mb-4">
+                    <input type="checkbox" id="checkSpecialCharacters" data-toggle="toggle" data-offstyle="dark" data-on="Yes" data-off="No">
+                    <span>include special characters</span>
+                    <span class="badge badge-light">.,+-*/!?;:{}()[]%$&~#@|</span>
+                </div>
+            </div>
+        </div>
+  
+  </main>
+  
+  <footer class="footer mt-auto py-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12 col-lg">
+          <a href="/privacy" class="link">Privacy</a>
+          <a href="/contact" class="link">Contact</a>
+          <span>✍</span>
+          <a href="https://keenthinker.com" class="link" target="_blank" rel="noopener">keenthinker.com</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  </body>
+  
+</html>

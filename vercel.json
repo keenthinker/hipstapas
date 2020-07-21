@@ -3,6 +3,7 @@
   "routes": [ 
 		{ "src": "/index", "dest": "/index.html"},
 		{ "src": "/docs", "dest": "/docs.html"},
+		{ "src": "/playground", "dest": "/playground.html"},
 		{ "src": "/privacy", "dest": "/privacy.html"},
 		{ "src": "/contact", "dest": "/contact.html"}
 	]
