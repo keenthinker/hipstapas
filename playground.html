@@ -75,6 +75,38 @@
           .redunderline {
             border-bottom: 0.1em solid #ff0000;
           }
+          /* https://codepen.io/scottzirkel/pen/yNxNME */
+          .hr-text {
+            line-height: 1em;
+            position: relative;
+            outline: 0;
+            border: 0;
+            color: black;
+            text-align: center;
+            height: 1.5em;
+            opacity: 1.;
+          }
+          .hr-text:before {
+            content: '';
+            background: -webkit-gradient(linear, left top, right top, from(transparent), color-stop(#818078), to(transparent));
+            background: linear-gradient(to right, transparent, #3e4dda, transparent);
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 100%;
+            height: 1px;
+          }
+          .hr-text:after {
+            content: attr(data-content);
+            position: relative;
+            display: inline-block;
+            color: black;
+            padding: 0 .5em;
+            line-height: 1.5em;
+            color: #3e4dda;
+            background-color: #ffffff;
+          }
+          /***/
         </style>
     
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -95,6 +127,15 @@
             function resultsCountChange(v) {
               setTextForId('resultsCountRangeValue', v);
             }
+            function resultsCountChangeUuid(v) {
+              setTextForId('resultsCountRangeValueUuid', v);
+            }
+            function resultsCountChangeWordList(v) {
+              setTextForId('resultsCountRangeValueWordList', v);
+            }
+            function wordsCountChangeWordList(v) {
+              setTextForId('wordsCountRangeValueWordList', v);
+            }
 
             $(document).ready(async () => {
                 console.log("ready to rumble.");
@@ -102,8 +143,11 @@
                 rangeMinLengthChange(10);
                 rangeMaxLengthChange(30);
                 resultsCountChange(1);
+                resultsCountChangeUuid(1);
+                resultsCountChangeWordList(1);
+                wordsCountChangeWordList(6);
                 //
-                $('#generate').click(function() {
+                $('#generate').click(() => {
                     let includeSmallCharacters = $('#checkSmallCharacters').prop("checked");
                     let includeCapitalCharacters = $('#checkCapitalCharacters').prop("checked");
                     let includeNumbers = $('#checkNumbers').prop("checked");
@@ -124,6 +168,43 @@
                             console.log(data);
                             $('#chbs').val(data);
                             $('#chbsQuery').val('https://hipstapas.dev' + queryPassword);
+                        })
+                    .catch(function(err) { console.error(err);});
+                });
+
+                $('#generateUuid').click(() => {
+                  let resultsCount = Number($('#resultsCountRangeValueUuid').text());
+                  let queryUuid = `/api/uuid?resultsCount=${resultsCount}`;
+                    
+                    console.log(queryUuid);
+
+                    fetch(queryUuid)
+                    .then(function(res){
+                        return res.text();
+                    })
+                    .then(function(data) {
+                            console.log(data);
+                            $('#uuidOutput').val(data);
+                            $('#uuidQuery').val('https://hipstapas.dev' + queryUuid);
+                        })
+                    .catch(function(err) { console.error(err);});
+                });
+
+                $('#generateWordList').click(() => {
+                  let wordsCount = Number($('#wordsCountRangeValueWordList').text());
+                  let resultsCount = Number($('#resultsCountRangeValueWordList').text());
+                  let queryWordList = `/api/wordlist?words=${wordsCount}&resultsCount=${resultsCount}`;
+                    
+                    console.log(queryWordList);
+
+                    fetch(queryWordList)
+                    .then(function(res){
+                        return res.text();
+                    })
+                    .then(function(data) {
+                            console.log(data);
+                            $('#wordListOutput').val(data);
+                            $('#wordListQuery').val('https://hipstapas.dev' + queryWordList);
                         })
                     .catch(function(err) { console.error(err);});
                 });
@@ -179,6 +260,7 @@
             <div class="row">
                 <div class="col mt-2">
                     <div class="form-group">
+                      <hr class="hr-text" data-content="Password">
                       <label for="formControl">Output</label>
                       <textarea class="form-control" readonly id="chbs"></textarea>
                     </div>
@@ -279,7 +361,108 @@
                   </div>
               </div>
           </div>
+          <!-- uuid -->
+          <div class="row">
+            <div class="col mt-2">
+                <div class="form-group">
+                  <hr class="hr-text" data-content="UUID">
+                  <label for="formControl">Output</label>
+                  <textarea class="form-control" readonly id="uuidOutput"></textarea>
+                </div>
+            </div>
         </div>
+        <div class="row">
+          <div class="col mb-4">
+              <button href="#" id="generateUuid" class="btn btn-primary btn-lg btn-block" type="button">Generate</button>
+          </div>
+      </div>
+      <div class="row">
+        <div class="col mt-2">
+            <form>
+                <div class="form-group">
+                  <label for="formControlRange">Number of results: <span id="resultsCountRangeValueUuid"></span></label>
+                  <input 
+                    type="range" 
+                    min="1"
+                    max="10"
+                    step="1"
+                    value="1"
+                    class="form-control-range" 
+                    id="rangeResultsCountUuid" 
+                    onchange="resultsCountChangeUuid(value)">
+                </div>
+              </form>
+        </div>
+    </div>
+        <div class="row">
+          <div class="col mt-2 mb-4">
+              <div class="form-group">
+                <label for="formControl">Query</label>
+                <textarea class="form-control" readonly id="uuidQuery"></textarea>
+              </div>
+          </div>
+      </div>
+      <!-- word list -->
+        <div class="row">
+          <div class="col mt-2">
+              <div class="form-group">
+                <hr class="hr-text" data-content="EFF word list">
+                <label for="formControl">Output</label>
+                <textarea class="form-control" readonly id="wordListOutput"></textarea>
+              </div>
+          </div>
+      </div>
+      <div class="row">
+        <div class="col mb-4">
+            <button href="#" id="generateWordList" class="btn btn-primary btn-lg btn-block" type="button">Generate</button>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col mt-2">
+          <form>
+              <div class="form-group">
+                <label for="formControlRange">Number of words: <span id="wordsCountRangeValueWordList"></span></label>
+                <input 
+                  type="range" 
+                  min="1"
+                  max="10"
+                  step="1"
+                  value="6"
+                  class="form-control-range" 
+                  id="rangeWordsCountWordList" 
+                  onchange="wordsCountChangeWordList(value)">
+              </div>
+            </form>
+      </div>
+  </div>
+    <div class="row">
+      <div class="col mt-2">
+          <form>
+              <div class="form-group">
+                <label for="formControlRange">Number of results: <span id="resultsCountRangeValueWordList"></span></label>
+                <input 
+                  type="range" 
+                  min="1"
+                  max="10"
+                  step="1"
+                  value="1"
+                  class="form-control-range" 
+                  id="rangeResultsCountWordList" 
+                  onchange="resultsCountChangeWordList(value)">
+              </div>
+            </form>
+      </div>
+  </div>
+      <div class="row">
+        <div class="col mt-2 mb-4">
+            <div class="form-group">
+              <label for="formControl">Query</label>
+              <textarea class="form-control" readonly id="wordListQuery"></textarea>
+            </div>
+        </div>
+    </div>
+
+    </div>
   
   </main>
   
