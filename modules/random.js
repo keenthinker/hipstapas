@@ -27,7 +27,7 @@ function randomNumber(min, max) {
  * @returns {string} random character (actually a string with the length of one) from the specified input string
  */
 function randomCharacter(alphabet) {
-  let position = randomNumber(0, alphabet.length);
+  let position = randomNumber(0, alphabet.length - 1);
   return alphabet[position];
 }
 
