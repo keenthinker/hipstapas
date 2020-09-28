@@ -56,6 +56,11 @@
           code {
             font-size: 80%;
           }
+
+          .table .documentation {
+            font-size: 80%;
+            border-bottom: solid 2px #afafaf;
+          }
           
           @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
                       body {
@@ -142,9 +147,21 @@
                   <h2>1. Supported HTTP methods</h2>
                   <p>Currently all API endpoints are supporting only the HTTP GET method. 
                     Accepting HTTP POST is work in progress.
-                    The Base API URL is <em>https://hipstapas.dev/api</em>.</p>
+                    <table class="table table-striped table-bordered table-sm">
+                      <thead><th>Base API address</th></thead>
+                      <tbody>
+                      <tr><td>https://hipstapas.dev/api</td></tr>
+                    </tbody>
+                    </table>
+                  </p>
                   <h2>2. Generation options</h2>
-                  <p>Since currently only GET methods exists, all options should be set using <em>query parameters</em>. Every endpoint supports a <em>resultsCount</em> query parameter, that controls how many items are returned at once. Example: <a href="https://hipstapas.dev/api/?resultsCount=5" target="_blank" rel="noopener">https://hipstapas.dev/api/?resultsCount=5</a> generates 5 phrases at once and returns an array containing the newly generated strings. For query parameters of type boolean that are not explicitely specified, <em>true</em> is always the default option.</p>
+                  <p>Since currently only GET methods exists, all options should be set using <b>query parameters</b>. 
+                    Every endpoint supports a <b>resultsCount</b> query parameter, that controls how many items are returned at once. 
+                    <br />
+                    Example: <a href="https://hipstapas.dev/api/?resultsCount=5" target="_blank" rel="noopener">https://hipstapas.dev/api/?resultsCount=5</a> 
+                    generates 5 phrases at once and returns a JSON array containing the newly generated strings. 
+                    <br />
+                    For query parameters of type boolean that are not explicitely specified, <b>true</b> is always the default option.</p>
                   <h2>3. Endpoints</h2>  
                   <h2>3.1 Password - the default endpoint (/index)</h2>
                     <p>The easiest way to generate a strong phrase is to call the base API address - call <a href="https://hipstapas.dev/api" target="_blank" rel="noopener">https://hipstapas.dev/api</a> to generate a new password. 
@@ -160,19 +177,26 @@
                       </thead>
                       <tbody>
                         <tr><td>alphabetSmall</td><td>Boolean</td><td>true|false</td></tr>
+                        <tr><td colspan="3" class="documentation">If set to <b>true</b> the generation alphabet contains small characters: <em>abcdefghijklmnopqrstuvwxyz</em></td></tr>
                         <tr><td>alphabetCapital</td><td>Boolean</td><td>true|false</td></tr>
+                        <tr><td colspan="3" class="documentation">If set to <b>true</b> the generation alphabet contains capital characters: <em>ABCDEFGHIJKLMNOPQRSTUVWXYZ</em></td></tr>
                         <tr><td>alphabetNumber</td><td>Boolean</td><td>true|false</td></tr>
+                        <tr><td colspan="3" class="documentation">If set to <b>true</b> the generation alphabet contains numbers: <em>0123456789</em></td></tr>
                         <tr><td>alphabetSpecial</td><td>Boolean</td><td>true|false</td></tr>
+                        <tr><td colspan="3" class="documentation">If set to <b>true</b> the generation alphabet contains special characters: <em>.,+-*/!?;:{}()[]%$&~#@|</em></td></tr>
                         <tr><td>lengthMin</td><td>Number</td><td>1..2048</td></tr>
+                        <tr><td colspan="3" class="documentation">Defines the minimal length of the generated phrase</td></tr>
                         <tr><td>lengthMax</td><td>Number</td><td>1..2048</td></tr>
-                        <tr><td>resultsCount</td><td>Number</td><td>1..100</td></tr>                        
+                        <tr><td colspan="3" class="documentation">Defines the maximal length of the generated phrase</td></tr>
+                        <tr><td>resultsCount</td><td>Number</td><td>1..100</td></tr>     
+                        <tr><td colspan="3" class="documentation">Defines how many results should be generated at once</td></tr>                   
                       </tbody>
                     </table>
                     Example call to: 
                     <ul>
                       <li>generate 5 phrases at once</li>
                       <li>where each phrase is exactly 5 characters long</li>
-                      <li>using only small characters and numbers</li>
+                      <li>excluding special and capital characters (in other words - using only small characters and numbers)</li>
                     </ul>
                     <a href="https://hipstapas.dev/api?lengthMin=5&lengthMax=5&resultsCount=5&alphabetSpecial=false&alphabetCapital=false" target="_blank" rel="noopener">
                       https://hipstapas.dev/api
@@ -182,7 +206,7 @@
                     </br>&alphabetSpecial=false
                     </br>&alphabetCapital=false</a>.
                     </p>
-                    <h2>3.2. Generating UUID (/uuid)</h2>
+                    <h2>3.2 Generating UUID (/uuid)</h2>
                     <p>Call <a href="https://hipstapas.dev/api/uuid" target="_blank" rel="noopener">https://hipstapas.dev/api/uuid</a> to generate a new (version 4) uuid. That's it!
                     </br>Options:
                     <table class="table table-striped table-bordered table-sm">
@@ -195,12 +219,13 @@
                       </thead>
                       <tbody>
                         <tr><td>resultsCount</td><td>Number</td><td>1..100</td></tr>
+                        <tr><td colspan="3" class="documentation">Defines how many results should be generated at once</td></tr>
                       </tbody>
                     </table>
                   </p>
                     <h2>3.3 EFF wordlist (/wordlist)</h2>
                     <p>Call <a href="https://hipstapas.dev/api/wordlist" target="_blank" rel="noopener">https://hipstapas.dev/api/wordlist</a> to create a passphrase from 6 words (as described and suggested by EFF <a href="https://www.eff.org/de/dice">https://www.eff.org/de/dice</a>). 
-                      This is the default option. The count of the generated words can be set between <em>1</em> and <em>50</em> using the query parameter <em><b>words</b></em>, 
+                      This is the default option. The count of the words per passphrase can be set between <b>1</b> and <b>50</b> using the query parameter <b>words</b>, 
                       e.g. <a href="https://hipstapas.dev/api/wordlist?words=3" target="_blank" rel="noopener">https://hipstapas.dev/api/wordlist/?words=3</a>.
                     </br>Options:
                     <table class="table table-striped table-bordered table-sm">
@@ -213,10 +238,16 @@
                       </thead>
                       <tbody>
                         <tr><td>words</td><td>Number</td><td>1..50</td></tr>
+                        <tr><td colspan="3" class="documentation">Defines the count of the words per passphrase</td></tr>
                         <tr><td>resultsCount</td><td>Number</td><td>1..100</td></tr>
+                        <tr><td colspan="3" class="documentation">Defines how many results should be generated at once</td></tr>
                       </tbody>
                     </table>
                   </p>
+                  <h2>4. Custom policy</h2>
+                  <p>WIP</p>
+                  <h2>5. API definition (OpenAPI / Swagger)</h2>
+                  <p>WIP</p>
                 </div>
             </div>
         </div>
