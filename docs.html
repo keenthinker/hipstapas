@@ -126,14 +126,14 @@
               <div class="row">
                   <div class="col">
                       <h1 class="mt-5">API Documentation</h1>
-                      <p>1. Supported HTTP methods</p>
-                      <p>2. Generation options</p>
-                      <p>3. Endpoints</p>
-                      <p>3.1 Password</p>
-                      <p>3.2 UUID</p>
-                      <p>3.3 EFF wordlist</p>
-                      <p>4. Custom policy</p>
-                      <p>5. API definition (OpenAPI / Swagger)</p>
+                      <p><a href="#methods">1. Supported HTTP methods</a></p>
+                      <p><a href="#options">2. Generation options</a></p>
+                      <p><a href="#endpoints">3. Endpoints</a></p>
+                      <p><a href="#password">3.1 Password</a></p>
+                      <p><a href="#uuid">3.2 UUID</a></p>
+                      <p><a href="#wordlist">3.3 EFF wordlist</a></p>
+                      <p><a href="#policy">4. Custom policy</a></p>
+                      <p><a href="#apidefinition">5. API definition (OpenAPI / Swagger)</a></p>
                   </div>
                   <div class="col mt-4">
                       <img class="img-fluid" src="images/undraw_File_bundle_xl7g.svg">
@@ -144,7 +144,7 @@
           <div class="container">
             <div class="row">
                 <div class="col">
-                  <h2>1. Supported HTTP methods</h2>
+                  <h2 id="methods">1. Supported HTTP methods</h2>
                   <p>Currently all API endpoints are supporting only the HTTP GET method. 
                     Accepting HTTP POST is work in progress.
                     <table class="table table-striped table-bordered table-sm">
@@ -154,7 +154,7 @@
                     </tbody>
                     </table>
                   </p>
-                  <h2>2. Generation options</h2>
+                  <h2 id="options">2. Generation options</h2>
                   <p>Since currently only GET methods exists, all options should be set using <b>query parameters</b>. 
                     Every endpoint supports a <b>resultsCount</b> query parameter, that controls how many items are returned at once. 
                     <br />
@@ -162,8 +162,8 @@
                     generates 5 phrases at once and returns a JSON array containing the newly generated strings. 
                     <br />
                     For query parameters of type boolean that are not explicitely specified, <b>true</b> is always the default option.</p>
-                  <h2>3. Endpoints</h2>  
-                  <h2>3.1 Password - the default endpoint (/index)</h2>
+                  <h2 id="endpoints">3. Endpoints</h2>  
+                  <h2 id="password">3.1 Password - the default endpoint (/index)</h2>
                     <p>The easiest way to generate a strong phrase is to call the base API address - call <a href="https://hipstapas.dev/api" target="_blank" rel="noopener">https://hipstapas.dev/api</a> to generate a new password. 
                       That's it! You just created a password using the default options (alphabet consists of small, capital, numbers and special charactes, min. length is 16 and max. length is 32 characters).
                     <br/>Options: 
@@ -206,7 +206,7 @@
                     </br>&alphabetSpecial=false
                     </br>&alphabetCapital=false</a>.
                     </p>
-                    <h2>3.2 Generating UUID (/uuid)</h2>
+                    <h2 id="uuid">3.2 Generating UUID (/uuid)</h2>
                     <p>Call <a href="https://hipstapas.dev/api/uuid" target="_blank" rel="noopener">https://hipstapas.dev/api/uuid</a> to generate a new (version 4) uuid. That's it!
                     </br>Options:
                     <table class="table table-striped table-bordered table-sm">
@@ -223,7 +223,7 @@
                       </tbody>
                     </table>
                   </p>
-                    <h2>3.3 EFF wordlist (/wordlist)</h2>
+                    <h2 id="wordlist">3.3 EFF wordlist (/wordlist)</h2>
                     <p>Call <a href="https://hipstapas.dev/api/wordlist" target="_blank" rel="noopener">https://hipstapas.dev/api/wordlist</a> to create a passphrase from 6 words (as described and suggested by EFF <a href="https://www.eff.org/de/dice">https://www.eff.org/de/dice</a>). 
                       This is the default option. The count of the words per passphrase can be set between <b>1</b> and <b>50</b> using the query parameter <b>words</b>, 
                       e.g. <a href="https://hipstapas.dev/api/wordlist?words=3" target="_blank" rel="noopener">https://hipstapas.dev/api/wordlist/?words=3</a>.
@@ -244,10 +244,14 @@
                       </tbody>
                     </table>
                   </p>
-                  <h2>4. Custom policy</h2>
+                  <h2 id="policy">4. Custom policy</h2>
                   <p>WIP</p>
-                  <h2>5. API definition (OpenAPI / Swagger)</h2>
-                  <p>WIP</p>
+                  <h2 id="apidefinition">5. API definition (OpenAPI / Swagger)</h2>
+                  <p>The hipstapas API definition: 
+                    <ul>
+                      <li><a href="apidefinition.yaml">apidefinition.yaml</a></li>
+                      <li><a href="apidefinition.json">apidefinition.json</a></li>
+                    </ul></p>
                 </div>
             </div>
         </div>

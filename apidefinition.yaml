@@ -1,0 +1,139 @@
+swagger: "2.0"
+info:
+  description: "This is the description of the hipstapas API. You can find out more at [https://hipstapas.dev](https://hipstapas.dev). You can find the documentation at [https://hipstapas.dev/docs](https://hipstapas.dev/docs)."
+  version: "1.0.0"
+  title: "hipstapas.dev"
+  termsOfService: "https://hipstapas.dev/privacy"
+  contact:
+    email: "hello@hipstapas.dev"
+  license:
+    name: "MIT"
+    url: "https://github.com/keenthinker/hipstapas/blob/master/LICENSE"
+host: "hipstapas.dev"
+basePath: "/api"
+tags:
+- name: "index"
+  description: "Generate strong phrases (passwords)"
+  externalDocs:
+    description: "Find out more"
+    url: "https://hipstapas.dev/docs"
+- name: "uuid"
+  description: "Generate UUID's / GUID's (version 4)"
+  externalDocs:
+    description: "Find out more"
+    url: "https://hipstapas.dev/docs"
+- name: "wordlist"
+  description: "Generate passphrases using the EFF wordlists"
+  externalDocs:
+    description: "Find out more"
+    url: "https://hipstapas.dev/docs"
+schemes:
+- "https"
+paths:
+  /index:
+    get:
+      tags:
+      - "index"
+      summary: ""
+      description: "The default value for all boolean parameters is `true`. The default value for `lengthMin` is 16 and for `lengthMax` is 32. If `resultsCount` is set to 1, then the content type is set to `text/html`. If `resultsCount` is set to more than 1, then the content type is set to `application/json` and the result is a json array holding all generated passwords."
+      operationId: "generatePassword"
+      produces:
+      - "text/html"
+      - "application/json"
+      parameters:
+      - in: "query"
+        name: "alphabetSmall"
+        type: boolean
+        description: "If set to `true` the generation alphabet contains small characters: `abcdefghijklmnopqrstuvwxyz`"
+        required: false
+      - in: "query"
+        name: "alphabetCapital"
+        type: boolean
+        description: "If set to `true` the generation alphabet contains capital characters: `ABCDEFGHIJKLMNOPQRSTUVWXYZ`"
+        required: false
+      - in: "query"
+        name: "alphabetNumber"
+        type: boolean
+        description: "If set to `true` the generation alphabet contains numbers: `0123456789`"
+        required: false
+      - in: "query"
+        name: "alphabetSpecial"
+        type: boolean
+        description: "If set to `true` the generation alphabet contains special characters: `.,+-*/!?;:{}()[]%$&~#@|`"
+        required: false
+      - in: "query"
+        name: "lengthMin"
+        type: integer
+        description: "Defines the minimal length of the generated phrase"
+        minimum: 1
+        maximum: 2048
+        required: false
+      - in: "query"
+        name: "lengthMax"
+        type: integer
+        description: "Defines the maximal length of the generated phrase"
+        minimum: 1
+        maximum: 2048
+        required: false
+      - in: "query"
+        name: "resultsCount"
+        type: integer
+        description: "Defines how many results should be generated at once"
+        minimum: 1
+        maximum: 100
+        required: false
+      responses:
+        "200":
+          description: "OK. Validation errors are returned as string response."
+  /uuid:
+    get:
+      tags:
+      - "uuid"
+      summary: ""
+      description: ""
+      operationId: "generateUuid"
+      produces:
+      - "text/html"
+      - "application/json"
+      parameters:
+      - in: "query"
+        name: "resultsCount"
+        type: integer
+        description: "Defines how many results should be generated at once"
+        minimum: 1
+        maximum: 100
+        required: false
+      responses:
+        "200":
+          description: "OK. Validation errors are returned as string response."
+  /wordlist:
+    get:
+      tags:
+      - "wordlist"
+      summary: ""
+      description: "The default value for `words` is 6 - a newly generated passphrase contains 6 words (as described and suggested by EFF https://www.eff.org/de/dice)"
+      operationId: "generateWordlist"
+      produces:
+      - "text/html"
+      - "application/json"
+      parameters:
+      - in: "query"
+        name: "words"
+        type: integer
+        description: "Defines the count of the words per passphrase"
+        minimum: 1
+        maximum: 50
+        required: false
+      - in: "query"
+        name: "resultsCount"
+        type: integer
+        description: "Defines how many results should be generated at once"
+        minimum: 1
+        maximum: 100
+        required: false
+      responses:
+        "200":
+          description: "OK. Validation errors are returned as string response."
+externalDocs:
+  description: "Try the live interactive playground"
+  url: "https://hipstapas.dev/playground"
