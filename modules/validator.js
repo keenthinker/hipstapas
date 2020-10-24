@@ -1,3 +1,19 @@
+function validateResultObject(validationStatus, errorMessage) {
+  return {
+    "success": validationStatus,
+    "error": errorMessage
+  };
+}
+
+function evaluateValidation(validationResults) {
+  for(let i = 0; i < validationResults.length; i++) {
+      if (!validationResults[i].success) {
+          return validateResultObject(false, validationResults[i].error);
+      }
+  }
+  return validateResultObject(true, "");
+}
+
 /**
  * Validates the specified input using the validation rules. 
  * Every validation rule is applied to the input value. 
@@ -28,16 +44,10 @@ function validate(input, converter, validationRules, callback) {
         } 
       }
       callback(value);
-      return {
-        "success": validationOk,
-        "error": errorMessage
-      };
+      return validateResultObject(validationOk,errorMessage);
     }
     // if parameter is not set, then pass
-    return {
-      "success": true,
-      "error": ""
-    };
+    return validateResultObject(true, "");
   }
 
-module.exports = { validate };
+module.exports = { validate, validateResultObject, evaluateValidation };
