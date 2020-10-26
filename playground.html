@@ -136,6 +136,15 @@
             function wordsCountChangeWordList(v) {
               setTextForId('wordsCountRangeValueWordList', v);
             }
+            function minChangeRandomNumber(v) {
+              setTextForId('minRangeValueRandomNumber', v); 
+            }
+            function maxChangeRandomNumber(v) {
+              setTextForId('maxRangeValueRandomNumber', v); 
+            }
+            function resultsCountChangeRandomNumber(v) {
+              setTextForId('resultsCountRangeValueRandomNumber', v);
+            }
 
             $(document).ready(async () => {
                 console.log("ready to rumble.");
@@ -146,6 +155,9 @@
                 resultsCountChangeUuid(1);
                 resultsCountChangeWordList(1);
                 wordsCountChangeWordList(6);
+                minChangeRandomNumber(1);
+                maxChangeRandomNumber(100);
+                resultsCountChangeRandomNumber(1);
                 //
                 $('#generate').click(() => {
                     let includeSmallCharacters = $('#checkSmallCharacters').prop("checked");
@@ -205,6 +217,28 @@
                             console.log(data);
                             $('#wordListOutput').val(data);
                             $('#wordListQuery').val('https://hipstapas.dev' + queryWordList);
+                        })
+                    .catch(function(err) { console.error(err);});
+                });
+
+                $('#generateRandomNumber').click(() => {
+                  let min = Number($('#minRangeValueRandomNumber').text());
+                  let max = Number($('#maxRangeValueRandomNumber').text());
+                  let resultsCount = Number($('#resultsCountRangeValueRandomNumber').text());
+                  let sort = $('#checkSortRandomNumber').prop("checked");
+                  let noDuplicates = $('#checkNoDuplicatesRandomNumber').prop("checked");
+                  let queryRandomNumber = `/api/random?min=${min}&max=${max}&sort=${sort}&noDuplicates=${noDuplicates}&resultsCount=${resultsCount}`;
+                    
+                    console.log(queryRandomNumber);
+
+                    fetch(queryRandomNumber)
+                    .then(function(res){
+                        return res.text();
+                    })
+                    .then(function(data) {
+                            console.log(data);
+                            $('#randomNumberOutput').val(data);
+                            $('#randomNumberQuery').val('https://hipstapas.dev' + queryRandomNumber);
                         })
                     .catch(function(err) { console.error(err);});
                 });
@@ -461,6 +495,97 @@
             </div>
         </div>
     </div>
+      <!-- random number -->
+      <div class="row">
+        <div class="col mt-2">
+            <div class="form-group">
+              <hr class="hr-text" data-content="Random number">
+              <label for="formControl">Output</label>
+              <textarea class="form-control" readonly id="randomNumberOutput"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col mb-4">
+          <button href="#" id="generateRandomNumber" class="btn btn-primary btn-lg btn-block" type="button">Generate</button>
+      </div>
+  </div>
+  <div class="row">
+    <div class="col mt-2">
+        <form>
+            <div class="form-group">
+              <label for="formControlRange">Min: <span id="minRangeValueRandomNumber"></span></label>
+              <input 
+                type="range" 
+                min="1"
+                max="100"
+                step="1"
+                value="1"
+                class="form-control-range" 
+                id="rangeMinRandomNumber" 
+                onchange="minChangeRandomNumber(value)">
+            </div>
+          </form>
+    </div>
+</div>
+<div class="row">
+  <div class="col mt-2">
+      <form>
+          <div class="form-group">
+            <label for="formControlRange">Max: <span id="maxRangeValueRandomNumber"></span></label>
+            <input 
+              type="range" 
+              min="1"
+              max="100"
+              step="1"
+              value="100"
+              class="form-control-range" 
+              id="rangeMaxRandomNumber" 
+              onchange="maxChangeRandomNumber(value)">
+          </div>
+        </form>
+  </div>
+</div>
+<div class="row">
+  <div class="col mt-2">
+      <form>
+          <div class="form-group">
+            <label for="formControlRange">Number of results: <span id="resultsCountRangeValueRandomNumber"></span></label>
+            <input 
+              type="range" 
+              min="1"
+              max="10"
+              step="1"
+              value="1"
+              class="form-control-range" 
+              id="rangeResultsCountRandomNumber" 
+              onchange="resultsCountChangeRandomNumber(value)">
+          </div>
+        </form>
+  </div>
+</div>
+<div class="row">
+  <div class="col mt-2">
+      <input type="checkbox" id="checkSortRandomNumber" data-toggle="toggle" data-offstyle="dark" data-on="Yes" data-off="No">
+      <span>sort number sequence</span>
+      <span class="badge badge-light"></span>
+  </div>
+</div>
+<div class="row">
+  <div class="col mt-2">
+      <input type="checkbox" id="checkNoDuplicatesRandomNumber" data-toggle="toggle" data-offstyle="dark" data-on="Yes" data-off="No">
+      <span>no duplicates in number sequence</span>
+      <span class="badge badge-light"></span>
+  </div>
+</div>
+    <div class="row">
+      <div class="col mt-2 mb-4">
+          <div class="form-group">
+            <label for="formControl">Query</label>
+            <textarea class="form-control" readonly id="randomNumberQuery"></textarea>
+          </div>
+      </div>
+  </div>
 
     </div>
   

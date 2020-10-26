@@ -1,5 +1,5 @@
 import { randomNumber } from '../modules/random.js';
-import { validate, evaluateValidation } from '../modules/validator.js';
+import { validate, evaluateValidation, validateResultObject } from '../modules/validator.js';
 
 function generateRandomNumbers(min, max, noDuplicates, sort, resultsCount) {
     let randomNumbers = [];
@@ -92,6 +92,10 @@ function validateAndGenerateRandomNumbers(minParameter, maxParameter, noDuplicat
 
     let validateResults = evaluateValidation([ validateResultsCount, validateMin, validateMax, validateNoDuplicates, validateSort ]);
     var results = [];
+    if (noDuplicates && (max < resultsCount)) {
+        validateResults = validateResultObject(false, "No duplicates is not possible, when max < results count")
+    }
+
     if (validateResults.success) {
         results = generateRandomNumbers(min, max, noDuplicates, sort, resultsCount);
     }

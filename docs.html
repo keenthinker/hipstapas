@@ -132,6 +132,7 @@
                       <p><a href="#password">3.1 Password</a></p>
                       <p><a href="#uuid">3.2 UUID</a></p>
                       <p><a href="#wordlist">3.3 EFF wordlist</a></p>
+                      <p><a href="#random">3.4 Random number</a></p>
                       <p><a href="#policy">4. Custom policy</a></p>
                       <p><a href="#apidefinition">5. API definition (OpenAPI / Swagger)</a></p>
                   </div>
@@ -244,6 +245,41 @@
                       </tbody>
                     </table>
                   </p>
+
+                  <h2 id="random">3.4 Random number (/random)</h2>
+                  <p>Call <a href="https://hipstapas.dev/api/random" target="_blank" rel="noopener">https://hipstapas.dev/api/random</a> to create a random number between <b>1</b> and <b>1048576</b>. 
+                    The default values are:
+                    <ul>
+                      <li>min=1</li>
+                      <li>max=1</li>
+                      <li>sort=false</li>
+                      <li>noDuplicates=false</li>
+                      <li>resultsCount=1</li>
+                    </ul>
+                    Options:
+                  <table class="table table-striped table-bordered table-sm">
+                    <thead>
+                      <tr>
+                        <th>Parameter name</th>
+                        <th>Type</th>
+                        <th>Allowed values</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>min</td><td>Number</td><td>1..1048576</td></tr>
+                      <tr><td colspan="3" class="documentation">Defines the lower bound of the number generator</td></tr>
+                      <tr><td>max</td><td>Number</td><td>1..1048576</td></tr>
+                      <tr><td colspan="3" class="documentation">Defines the upper bound of the number generator</td></tr>
+                      <tr><td>sort</td><td>Boolean</td><td>true|false</td></tr>
+                      <tr><td colspan="3" class="documentation">Sorts the generated number sequence</td></tr>
+                      <tr><td>noDuplicates</td><td>Boolean</td><td>true|false</td></tr>
+                      <tr><td colspan="3" class="documentation">The generated number sequence should contain only unique numbers</td></tr>
+                      <tr><td>resultsCount</td><td>Number</td><td>1..100</td></tr>
+                      <tr><td colspan="3" class="documentation">Defines how many results should be generated at once</td></tr>
+                    </tbody>
+                  </table>
+                </p>
+
                   <h2 id="policy">4. Custom policy</h2>
                   <p>WIP</p>
                   <h2 id="apidefinition">5. API definition (OpenAPI / Swagger)</h2>
