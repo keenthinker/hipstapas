@@ -113,9 +113,6 @@ module.exports = (req, res) => {
     let min = 1;
     let max = 1048576;
     let resultsCount = 1;
-    // TODO: noDuplicates needs additional validation when "true" 
-    // - results count and range should be "compatible", f.e. min=1,max=10, count=25 is not possible
-    // - distribution/speed - count and max?
     let noDuplicates = false;
     let sort = false;
 

@@ -134,6 +134,51 @@ paths:
       responses:
         "200":
           description: "OK. Validation errors are returned as string response."
+  /random:
+    get:
+      tags:
+      - "random"
+      summary: ""
+      description: "Random ..."
+      operationId: "generateRandomNumber"
+      produces:
+      - "text/html"
+      - "application/json"
+      parameters:
+      - in: "query"
+        name: "min"
+        type: integer
+        description: "Defines the lower bound of the number generator"
+        minimum: 1
+        maximum: 1048576
+        required: false
+      - in: "query"
+        name: "max"
+        type: integer
+        description: "Defines the upper bound of the number generator"
+        minimum: 1
+        maximum: 1048576
+        required: false
+      - in: "query"
+        name: "sort"
+        type: boolean
+        description: "If set to `true` the generated number sequence is sorted"
+        required: false
+      - in: "query"
+        name: "noDuplicates"
+        type: boolean
+        description: "If set to `true` the generated number sequence contains only unique numbers"
+        required: false
+      - in: "query"
+        name: "resultsCount"
+        type: integer
+        description: "Defines how many results should be generated at once"
+        minimum: 1
+        maximum: 100
+        required: false
+      responses:
+        "200":
+          description: "OK. Validation errors are returned as string response."
 externalDocs:
   description: "Try the live interactive playground"
   url: "https://hipstapas.dev/playground"
