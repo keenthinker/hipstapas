@@ -98,6 +98,9 @@ function generate(options) {
 }
 
 module.exports = (req, res) => {
+    const httpCodeError = 400;
+    const httpCodeOk = 200; 
+
     let resultsCount = 1;
     let lengthMin = 16;
     let lengthMax = 32;
@@ -184,38 +187,39 @@ module.exports = (req, res) => {
           ]
         }, (r) => alphabetSpecial = r.toLowerCase() === "true");
 
+        // todo: refactor to use something like modules/validator>evaluteValidation
         if (!validateLengthMin.success) {
-          res.status(200).send(validateLengthMin.error);
+          res.status(httpCodeError).send(validateLengthMin.error);
           return;
         }
 
         if (!validateLengthMax.success) {
-          res.status(200).send(validateLengthMax.error);
+          res.status(httpCodeError).send(validateLengthMax.error);
           return;
         }
 
         if (!validateResultsCount.success) {
-          res.status(200).send(validateResultsCount.error);
+          res.status(httpCodeError).send(validateResultsCount.error);
           return;
         }
 
         if (!validateAlphabetSmall.success) {
-          res.status(200).send(validateAlphabetSmall.error);
+          res.status(httpCodeError).send(validateAlphabetSmall.error);
           return;
         }
 
         if (!validateAlphabetCapital.success) {
-          res.status(200).send(validateAlphabetCapital.error);
+          res.status(httpCodeError).send(validateAlphabetCapital.error);
           return;
         }
 
         if (!validateAlphabetNumber.success) {
-          res.status(200).send(validateAlphabetNumber.error);
+          res.status(httpCodeError).send(validateAlphabetNumber.error);
           return;
         }
 
         if (!validateAlphabetSpecial.success) {
-          res.status(200).send(validateAlphabetSpecial.error);
+          res.status(httpCodeError).send(validateAlphabetSpecial.error);
           return;
         }
       }
@@ -232,5 +236,5 @@ module.exports = (req, res) => {
       alphabetNumber: alphabetNumber,
       alphabetSpecial: alphabetSpecial
      });
-    res.status(200).send(results.length == 1 ? results[0] : results);
+    res.status(httpCodeOk).send(results.length == 1 ? results[0] : results);
   }

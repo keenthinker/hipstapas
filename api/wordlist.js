@@ -37,6 +37,8 @@ function generateWordlists(resultsCount, rolls) {
 }
 
 module.exports = (req, res) => {
+    const httpCodeError = 400;
+    const httpCodeOk = 200; 
 
     const minWordsCount = 1;
     const maxWordsCount = 50;
@@ -74,16 +76,16 @@ module.exports = (req, res) => {
         }, (r) => resultsCount = r);
 
         if (!validateWordsCount.success) {
-            res.status(200).send(validateWordsCount.error);
+            res.status(httpCodeError).send(validateWordsCount.error);
             return;
         }
 
         if (!validateResultsCount.success) {
-            res.status(200).send(validateResultsCount.error);
+            res.status(httpCodeError).send(validateResultsCount.error);
             return;
         }
     }
 
     let results = generateWordlists(resultsCount, rolls);
-    res.status(200).send(results.length == 1 ? results[0] : results);
+    res.status(httpCodeOk).send(results.length == 1 ? results[0] : results);
 }

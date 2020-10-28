@@ -40,6 +40,9 @@ function validateAndGenerateUuids(resultsCountParameter) {
 }
 
 module.exports = (req, res) => {
+    const httpCodeError = 400;
+    const httpCodeOk = 200; 
+
     let r = {};
     let resultsCount = 1;
 
@@ -49,9 +52,9 @@ module.exports = (req, res) => {
 
     r = validateAndGenerateUuids(resultsCount);
     if (!r.success) {
-        res.status(200).send(r.error);
+        res.status(httpCodeError).send(r.error);
         return;
     }
     
-    res.status(200).send(r.results.length == 1 ? r.results[0] : r.results);
+    res.status(httpCodeOk).send(r.results.length == 1 ? r.results[0] : r.results);
 }

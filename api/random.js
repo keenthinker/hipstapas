@@ -109,6 +109,9 @@ function validateAndGenerateRandomNumbers(minParameter, maxParameter, noDuplicat
 
 
 module.exports = (req, res) => {
+    const httpCodeError = 400;
+    const httpCodeOk = 200; 
+
     let r = {};
     let min = 1;
     let max = 1048576;
@@ -126,9 +129,9 @@ module.exports = (req, res) => {
 
     r = validateAndGenerateRandomNumbers(min, max, noDuplicates, sort, resultsCount);
     if (!r.success) {
-        res.status(200).send(r.error);
+        res.status(httpCodeError).send(r.error);
         return;
     }
 
-    res.status(200).send(r.results.length == 1 ? r.results[0] : r.results);
+    res.status(httpCodeOk).send(r.results.length == 1 ? r.results[0] : r.results);
 }
