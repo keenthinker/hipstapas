@@ -1,5 +1,5 @@
 import { randomNumber, randomCharacter } from '../modules/random.js';
-import { validate } from '../modules/validator.js';
+import { validate, evaluateValidation } from '../modules/validator.js';
 
 /**
  * Validates and calculates the upper and the lower bound for the generator function 
@@ -187,40 +187,10 @@ module.exports = (req, res) => {
           ]
         }, (r) => alphabetSpecial = r.toLowerCase() === "true");
 
-        // todo: refactor to use something like modules/validator>evaluteValidation
-        if (!validateLengthMin.success) {
-          res.status(httpCodeError).send(validateLengthMin.error);
-          return;
-        }
-
-        if (!validateLengthMax.success) {
-          res.status(httpCodeError).send(validateLengthMax.error);
-          return;
-        }
-
-        if (!validateResultsCount.success) {
-          res.status(httpCodeError).send(validateResultsCount.error);
-          return;
-        }
-
-        if (!validateAlphabetSmall.success) {
-          res.status(httpCodeError).send(validateAlphabetSmall.error);
-          return;
-        }
-
-        if (!validateAlphabetCapital.success) {
-          res.status(httpCodeError).send(validateAlphabetCapital.error);
-          return;
-        }
-
-        if (!validateAlphabetNumber.success) {
-          res.status(httpCodeError).send(validateAlphabetNumber.error);
-          return;
-        }
-
-        if (!validateAlphabetSpecial.success) {
-          res.status(httpCodeError).send(validateAlphabetSpecial.error);
-          return;
+        const validateResults = evaluateValidation([validateLengthMin, validateLengthMax, validateResultsCount, validateAlphabetSmall, validateAlphabetCapital, validateAlphabetNumber, validateAlphabetSpecial]);
+        if (!validateResults.success) {
+          res.status(httpCodeError).send(validateResults.error);
+          return;          
         }
       }
     }
