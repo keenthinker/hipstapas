@@ -1,5 +1,6 @@
 import { randomNumber, randomCharacter } from '../modules/random.js';
 import { validate, evaluateValidation } from '../modules/validator.js';
+import { generationResult } from '../modules/utils.js';
 
 /**
  * Validates and calculates the upper and the lower bound for the generator function 
@@ -97,10 +98,108 @@ function generate(options) {
   return passPhrases;
 }
 
-module.exports = (req, res) => {
-    const httpCodeError = 400;
-    const httpCodeOk = 200; 
+function validateAndGeneratePassphrases(optionsParameter) {
+  let resultsCount = 1;
+  let lengthMin = 16;
+  let lengthMax = 32;
+  let alphabetSmall = true;
+  let alphabetCapital = true;
+  let alphabetNumber = true;
+  let alphabetSpecial = true;
 
+  var validateLengthMin = validate(optionsParameter.lengthMin, Number, {
+    rules: [
+      {
+        "check": function (v) { return Number.isInteger(v); },
+        "message": "Only numbers between 1 and 2048 are allowed as values for the query parameter \"lengthMin\". Example: https://hipstapas.dev/api/?lengthMin=10"  
+      },
+      {
+        "check": function (v) { return v >= 1 && v <= 2048; },
+        "message": "Query parameter value must be between 1 and 2048. Example: https://hipstapas.dev/api/?lengthMin=10"
+      }
+    ]
+  }, (r) => lengthMin = r);
+
+  var validateLengthMax = validate(optionsParameter.lengthMax, Number, {
+    rules: [
+      {
+        "check": function (v) { return Number.isInteger(v); },
+        "message": "Only numbers between 1 and 2048 are allowed as values for the query parameter \"lengthMax\". Example: https://hipstapas.dev/api/?lengthMax=10"  
+      },
+      {
+        "check": function (v) { return v >= 1 && v <= 2048; },
+        "message": "Query parameter value must be between 1 and 2048. Example: https://hipstapas.dev/api/?lengthMax=10"
+      }
+    ]
+  }, (r) => lengthMax = r);
+
+  var validateResultsCount = validate(optionsParameter.resultsCount, Number, {
+    rules: [
+      {
+        "check": function (v) { return Number.isInteger(v); },
+        "message": "Only numbers between 1 and 100 are allowed as values for the query parameter \"resultsCount\". Example: https://hipstapas.dev/api/?resultsCount=10"  
+      },
+      {
+        "check": function (v) { return v >= 1 && v <= 100; },
+        "message": "Query parameter value must be between 1 and 100. Example: https://hipstapas.dev/api/?resultsCount=10"
+      }
+    ]
+  }, (r) => resultsCount = r);
+
+  var validateAlphabetSmall = validate(optionsParameter.alphabetSmall, String, {
+    rules: [
+      {
+        "check": function (v) { return (v.toLowerCase() == "true") || (v.toLowerCase() == "false"); },
+        "message": "Query parameter value should be either 'true' or 'false'. Example: https://hipstapas.dev/api/?alphabetSmall=true"  
+      }
+    ]
+  }, (r) => alphabetSmall = r.toLowerCase() === "true");
+
+  var validateAlphabetCapital = validate(optionsParameter.alphabetCapital, String, {
+    rules: [
+      {
+        "check": function (v) { return (v.toLowerCase() == "true") || (v.toLowerCase() == "false"); },
+        "message": "Query parameter value should be either 'true' or 'false'. Example: https://hipstapas.dev/api/?alphabetCapital=true"  
+      }
+    ]
+  }, (r) => alphabetCapital = r.toLowerCase() === "true");
+
+  var validateAlphabetNumber = validate(optionsParameter.alphabetNumber, String, {
+    rules: [
+      {
+        "check": function (v) { return (v.toLowerCase() == "true") || (v.toLowerCase() == "false"); },
+        "message": "Query parameter value should be either 'true' or 'false'. Example: https://hipstapas.dev/api/?alphabetNumber=true"  
+      }
+    ]
+  }, (r) => alphabetNumber = r.toLowerCase() === "true");
+
+  var validateAlphabetSpecial = validate(optionsParameter.alphabetSpecial, String, {
+    rules: [
+      {
+        "check": function (v) { return (v.toLowerCase() == "true") || (v.toLowerCase() == "false"); },
+        "message": "Query parameter value should be either 'true' or 'false'. Example: https://hipstapas.dev/api/?alphabetSpecial=true"  
+      }
+    ]
+  }, (r) => alphabetSpecial = r.toLowerCase() === "true");
+
+  const validateResults = evaluateValidation([validateLengthMin, validateLengthMax, validateResultsCount, validateAlphabetSmall, validateAlphabetCapital, validateAlphabetNumber, validateAlphabetSpecial]);
+  var results = [];
+  if (validateResults.success) {
+    results = generate({ 
+      lengthMin: lengthMin, 
+      lengthMax: lengthMax,
+      resultsCount: resultsCount,
+      alphabetSmall: alphabetSmall,
+      alphabetCapital: alphabetCapital,
+      alphabetNumber: alphabetNumber,
+      alphabetSpecial: alphabetSpecial
+     });
+  }
+
+  return generationResult(validateResults.success, results, validateResults.error);
+}
+
+module.exports = (req, res) => {
     let resultsCount = 1;
     let lengthMin = 16;
     let lengthMax = 32;
@@ -111,93 +210,19 @@ module.exports = (req, res) => {
 
     if (req.query) {
       if (req.query !== undefined && JSON.stringify(req.query) !== '{}') {
-        
-        var validateLengthMin = validate(req.query.lengthMin, Number, {
-          rules: [
-            {
-              "check": function (v) { return Number.isInteger(v); },
-              "message": "Only numbers between 1 and 2048 are allowed as values for the query parameter \"lengthMin\". Example: https://hipstapas.dev/api/?lengthMin=10"  
-            },
-            {
-              "check": function (v) { return v >= 1 && v <= 2048; },
-              "message": "Query parameter value must be between 1 and 2048. Example: https://hipstapas.dev/api/?lengthMin=10"
-            }
-          ]
-        }, (r) => lengthMin = r);
-
-        var validateLengthMax = validate(req.query.lengthMax, Number, {
-          rules: [
-            {
-              "check": function (v) { return Number.isInteger(v); },
-              "message": "Only numbers between 1 and 2048 are allowed as values for the query parameter \"lengthMax\". Example: https://hipstapas.dev/api/?lengthMax=10"  
-            },
-            {
-              "check": function (v) { return v >= 1 && v <= 2048; },
-              "message": "Query parameter value must be between 1 and 2048. Example: https://hipstapas.dev/api/?lengthMax=10"
-            }
-          ]
-        }, (r) => lengthMax = r);
-
-        var validateResultsCount = validate(req.query.resultsCount, Number, {
-          rules: [
-            {
-              "check": function (v) { return Number.isInteger(v); },
-              "message": "Only numbers between 1 and 100 are allowed as values for the query parameter \"resultsCount\". Example: https://hipstapas.dev/api/?resultsCount=10"  
-            },
-            {
-              "check": function (v) { return v >= 1 && v <= 100; },
-              "message": "Query parameter value must be between 1 and 100. Example: https://hipstapas.dev/api/?resultsCount=10"
-            }
-          ]
-        }, (r) => resultsCount = r);
-
-        var validateAlphabetSmall = validate(req.query.alphabetSmall, String, {
-          rules: [
-            {
-              "check": function (v) { return (v.toLowerCase() == "true") || (v.toLowerCase() == "false"); },
-              "message": "Query parameter value should be either 'true' or 'false'. Example: https://hipstapas.dev/api/?alphabetSmall=true"  
-            }
-          ]
-        }, (r) => alphabetSmall = r.toLowerCase() === "true");
-
-        var validateAlphabetCapital = validate(req.query.alphabetCapital, String, {
-          rules: [
-            {
-              "check": function (v) { return (v.toLowerCase() == "true") || (v.toLowerCase() == "false"); },
-              "message": "Query parameter value should be either 'true' or 'false'. Example: https://hipstapas.dev/api/?alphabetCapital=true"  
-            }
-          ]
-        }, (r) => alphabetCapital = r.toLowerCase() === "true");
-
-        var validateAlphabetNumber = validate(req.query.alphabetNumber, String, {
-          rules: [
-            {
-              "check": function (v) { return (v.toLowerCase() == "true") || (v.toLowerCase() == "false"); },
-              "message": "Query parameter value should be either 'true' or 'false'. Example: https://hipstapas.dev/api/?alphabetNumber=true"  
-            }
-          ]
-        }, (r) => alphabetNumber = r.toLowerCase() === "true");
-
-        var validateAlphabetSpecial = validate(req.query.alphabetSpecial, String, {
-          rules: [
-            {
-              "check": function (v) { return (v.toLowerCase() == "true") || (v.toLowerCase() == "false"); },
-              "message": "Query parameter value should be either 'true' or 'false'. Example: https://hipstapas.dev/api/?alphabetSpecial=true"  
-            }
-          ]
-        }, (r) => alphabetSpecial = r.toLowerCase() === "true");
-
-        const validateResults = evaluateValidation([validateLengthMin, validateLengthMax, validateResultsCount, validateAlphabetSmall, validateAlphabetCapital, validateAlphabetNumber, validateAlphabetSpecial]);
-        if (!validateResults.success) {
-          res.status(httpCodeError).send(validateResults.error);
-          return;          
-        }
+        resultsCount = req.query.resultsCount;
+        lengthMin = req.query.lengthMin;
+        lengthMax = req.query.lengthMax;
+        alphabetSmall = req.query.alphabetSmall;
+        alphabetCapital = req.query.alphabetCapital;
+        alphabetNumber = req.query.alphabetNumber;
+        alphabetSpecial = req.query.alphabetSpecial;
       }
     }
     //res.setHeader('Content-Type', 'application/json');
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-Id, Content-Type, Accept');
-    let results = generate({ 
+    const r = validateAndGeneratePassphrases({ 
       lengthMin: lengthMin, 
       lengthMax: lengthMax,
       resultsCount: resultsCount,
@@ -206,5 +231,7 @@ module.exports = (req, res) => {
       alphabetNumber: alphabetNumber,
       alphabetSpecial: alphabetSpecial
      });
-    res.status(httpCodeOk).send(results.length == 1 ? results[0] : results);
+     const httpCode = r.success ? 200 /* OK */ : 400 /* Error */;
+     const message = r.success ? r.result : r.error;
+     res.status(httpCode).send(message);
   }
