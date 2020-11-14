@@ -1,5 +1,6 @@
 import { randomNumber } from '../modules/random.js';
 import { validate, evaluateValidation, validateResultObject } from '../modules/validator.js';
+import { generationResult } from '../modules/utils.js';
 
 function generateRandomNumbers(min, max, noDuplicates, sort, resultsCount) {
     let randomNumbers = [];
@@ -100,19 +101,11 @@ function validateAndGenerateRandomNumbers(minParameter, maxParameter, noDuplicat
         results = generateRandomNumbers(min, max, noDuplicates, sort, resultsCount);
     }
 
-    return {
-        "success": validateResults.success,
-        "error": validateResults.error,
-        "results": results
-    };
+    return generationResult(validateResults.success, results, validateResults.error);
 }
 
 
 module.exports = (req, res) => {
-    const httpCodeError = 400;
-    const httpCodeOk = 200; 
-
-    let r = {};
     let min = 1;
     let max = 1048576;
     let resultsCount = 1;
@@ -127,11 +120,8 @@ module.exports = (req, res) => {
         sort = req.query.sort;
     }
 
-    r = validateAndGenerateRandomNumbers(min, max, noDuplicates, sort, resultsCount);
-    if (!r.success) {
-        res.status(httpCodeError).send(r.error);
-        return;
-    }
-
-    res.status(httpCodeOk).send(r.results.length == 1 ? r.results[0] : r.results);
+    const r = validateAndGenerateRandomNumbers(min, max, noDuplicates, sort, resultsCount);
+    const httpCode = r.success ? 200 /* OK */ : 400 /* Error */;
+    const message = r.success ? r.result : r.error;
+    res.status(httpCode).send(message);
 }

@@ -8,5 +8,8 @@
 		{ "src": "/contact", "dest": "/contact.html"},
 		{ "handle": "filesystem" },
 		{ "src": "/(.*)", "status": 404, "dest": "/index.html" }
-	]
+	],
+    "env": {
+        "HIPSTALOG_CALLER_KEY": "@hipstalog-caller-key"
+    }
 }

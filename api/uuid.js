@@ -1,5 +1,6 @@
 const { v4: uuidv4 } = require('uuid');
 import { validate } from '../modules/validator.js';
+import { generationResult } from '../modules/utils.js';
 
 function generateUuids(resultsCount)
 {
@@ -31,30 +32,18 @@ function validateAndGenerateUuids(resultsCountParameter) {
         results = generateUuids(resultsCount);
     }
 
-    // object {  ruleValidationStatus; ruleValidationError; generationResult }
-    return {
-        "success": validateResultsCount.success,
-        "error": validateResultsCount.error,
-        "results": results
-    };
+    return generationResult(validateResultsCount.success, results, validateResultsCount.error);
 }
 
 module.exports = (req, res) => {
-    const httpCodeError = 400;
-    const httpCodeOk = 200; 
-
-    let r = {};
     let resultsCount = 1;
 
     if (req.query !== undefined && JSON.stringify(req.query) !== '{}') {
         resultsCount = req.query.resultsCount;
     }
 
-    r = validateAndGenerateUuids(resultsCount);
-    if (!r.success) {
-        res.status(httpCodeError).send(r.error);
-        return;
-    }
-    
-    res.status(httpCodeOk).send(r.results.length == 1 ? r.results[0] : r.results);
+    const r = validateAndGenerateUuids(resultsCount);
+    const httpCode = r.success ? 200 /* OK */ : 400 /* Error */;
+    const message = r.success ? r.result : r.error;
+    res.status(httpCode).send(message);
 }
