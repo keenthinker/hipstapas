@@ -18,9 +18,11 @@
     "hipstapas",
     "password",
     "uuid",
-    "wordlist"
+    "wordlist",
+    "random",
+    "hipstapas.dev"
   ],
-  "author": "",
+  "author": "keenthinker.com",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/keenthinker/hipstapas/issues"

@@ -70,10 +70,10 @@ function generate(options) {
   let includeAlphabetNumber = options.alphabetNumber;
   let includeAlphabetSpecial = options.alphabetSpecial;
 
-  let alphabetSmall = "abcdefghijklmnopqrstuvwxyz";
-  let alphabetCapital = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  let alphabetNumber = "0123456789";
-  let alphabetSpecial = ".,+-*/!?;:{}()[]%$&~#@|";
+  const alphabetSmall = "abcdefghijklmnopqrstuvwxyz";
+  const alphabetCapital = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const alphabetNumber = "0123456789";
+  const alphabetSpecial = ".,+-*/!?;:{}()[]%$&~#@|";
 
   let alphabet = "";
   
