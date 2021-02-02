@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
   description: "This is the description of the hipstapas API. You can find out more at [https://hipstapas.dev](https://hipstapas.dev). You can find the documentation at [https://hipstapas.dev/docs](https://hipstapas.dev/docs)."
-  version: "1.0.0"
+  version: "1.1.0"
   title: "hipstapas.dev"
   termsOfService: "https://hipstapas.dev/privacy"
   contact:

@@ -1,7 +1,7 @@
 {
   "name": "hipstapas",
-  "version": "1.0.0",
-  "description": "[https://hipstapas.dev/](https://hipstapas.dev/)",
+  "version": "1.1.0",
+  "description": "Hipster Password Software as a Service - https://hipstapas.dev",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,7 +11,7 @@
     "url": "git+https://github.com/keenthinker/hipstapas.git"
   },
   "dependencies": {
-    "uuid": "^8.1.0"
+    "hipstapas.core": "^1.1.2"
   },
   "keywords": [
     "saas",
