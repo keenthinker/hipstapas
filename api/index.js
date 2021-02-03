@@ -1,7 +1,8 @@
 const { password } = require('hipstapas.core')
 const { firstItemIfArrayHasLengthOne, executeIfConditionIsMet, evaluateBooleanQueryParameter } = require('../modules/utils');
+const { logEndpointCall } = require('../modules/faunadblogger');
 
-module.exports = (req, res) => {
+module.exports = async (req, res) => {
     let resultsCount = 1;
     let lengthMin = 16;
     let lengthMax = 32;
@@ -34,7 +35,12 @@ module.exports = (req, res) => {
       alphabetSpecial: alphabetSpecial
      };
     const r = password(options);
-     const httpCode = r.success ? 200 /* OK */ : 400 /* Error */;
-     const message = r.success ? firstItemIfArrayHasLengthOne(r.result) : r.error;
-     res.status(httpCode).send(message);
+    const httpCode = r.success ? 200 /* OK */ : 400 /* Error */;
+    const message = r.success ? firstItemIfArrayHasLengthOne(r.result) : r.error;
+    try {
+      await logEndpointCall('password', httpCode);
+    } catch (error) {
+      console.log(error);
+    }
+    res.status(httpCode).send(message);
   }

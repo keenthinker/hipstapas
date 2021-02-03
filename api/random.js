@@ -1,7 +1,8 @@
 const { random } = require('hipstapas.core')
 const { firstItemIfArrayHasLengthOne, executeIfConditionIsMet, evaluateBooleanQueryParameter } = require('../modules/utils');
+const { logEndpointCall } = require('../modules/faunadblogger');
 
-module.exports = (req, res) => {
+module.exports = async (req, res) => {
     let min = 1;
     let max = 1048576;
     let resultsCount = 1;
@@ -26,5 +27,10 @@ module.exports = (req, res) => {
     const r = random(options);
     const httpCode = r.success ? 200 /* OK */ : 400 /* Error */;
     const message = r.success ? firstItemIfArrayHasLengthOne(r.result) : r.error;
+    try {
+        await logEndpointCall('random', httpCode);
+    } catch (error) {
+        console.log(error);  
+    }
     res.status(httpCode).send(message);
 }

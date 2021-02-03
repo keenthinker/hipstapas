@@ -11,6 +11,7 @@
     "url": "git+https://github.com/keenthinker/hipstapas.git"
   },
   "dependencies": {
+    "faunadb": "^4.0.2",
     "hipstapas.core": "^1.1.2"
   },
   "keywords": [
