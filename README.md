@@ -12,7 +12,8 @@ Create secure and unique strings with ease!
 <p>💡Transparent, open source, highly configurable REST API for generating random phrases with tons of different options and a default one. Description of the API definition: <a href="https://hipstapas.dev/apidefinition.yaml">apidefinition.yaml</a>.</p>
 <p>❓Secure phrases generation is always needed. There are a lot of autonomous applications and services running in the background that need to have rotating passwords.</p>
 <p>👩‍💻Using a standard REST API the process of creating passwords can be automated whenever needed. Mobile, web and desktop applications can utilise the API to support the users for such repetative tasks that need to produce unique and strong output.</p>
-                      <p>💻Use the service straight from the terminal with the help of the companion app <a href="https://github.com/keenthinker/hipstapas.cli">hipstapas CLI</a>.</p>
+<p>💻Use the service straight from the terminal with the help of the companion app <a href="https://github.com/keenthinker/hipstapas.cli" target="_blank" rel="noopener">hipstapas CLI</a>.</p>
+<p>📦Use the service functionality <b>offline</b> with the help of the npm package <a href="https://www.npmjs.com/package/hipstapas.core" target="_blank" rel="noopener">hipstapas.core</a>.</p>
 <p>🌍A description of the different options can be found  on the <a href="https://hipstapas.dev/docs">documentation</a> page.
 <img class="img-fluid" src="https://hipstapas.dev/images/PasswordAsAService_MindMap_Features.png" />
 </p>
