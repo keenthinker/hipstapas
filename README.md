@@ -1,6 +1,8 @@
 <h1><a href="https://hipstapas.dev">hipstapas.dev</a></h1>
 
-![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/keenthinker/hipstapas?sort=semver) ![Github License](https://img.shields.io/badge/license-MIT-blue)
+![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/keenthinker/hipstapas?sort=semver)
+![GitHub package.json version](https://img.shields.io/github/package-json/v/keenthinker/hipstapas)
+![Github License](https://img.shields.io/badge/license-MIT-blue)
 
 <h2><span style="border-bottom: 0.1em solid #ff0000;">********</span> as a service 👌</h2>
 
