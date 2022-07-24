@@ -82,6 +82,15 @@
         <script>    
             $(document).ready(async () => {
                 console.log("ready to rumble.");
+                // prepare stats
+                await fetch("/api/stats")
+                .then(response => response.json())
+                .then(data => {
+                  console.log(data);
+                  data.random.forEach(element => {
+                    console.log(new Date(element.ts/1000));
+                  });
+                });
             });
         </script>
     </head>
