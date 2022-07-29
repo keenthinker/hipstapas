@@ -79,6 +79,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js" integrity="sha512-WNLxfP/8cVYL9sj8Jnp6et0BkubLP31jhTG9vhL/F5uEZmg5wEzKoXp1kJslzPQWwPT1eyMiSxlKCgzHLOTOTQ==" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.min.js" integrity="sha256-Xt8pc4G0CdcRvI0nZ2lRpZ4VHng0EoUDMlGcBSQ9HiQ=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.2/chart.min.js" integrity="sha512-zjlf0U0eJmSo1Le4/zcZI51ks5SjuQXkU0yOdsOBubjSmio9iCUp8XPLkEAADZNBdR9crRy3cniZ65LF2w8sRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.4/underscore-min.js" integrity="sha512-uLKRd6hCNYAENFn2h7w0p5hrUAz21bAu/85eqSqmQ1Y565lFInwRga9Lgk+QAAR9QvNfSlZjnEb+HHfzkAC/8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script>    
             $(document).ready(async () => {
                 console.log("ready to rumble.");
@@ -86,10 +88,67 @@
                 await fetch("/api/stats")
                 .then(response => response.json())
                 .then(data => {
-                  console.log(data);
+                  //console.log(data);
+                  let dates = [];
+                  let dateExplode = function (dateAsString, type) {
+                    let de = new Date(dateAsString/1000);
+                    return {
+                      'day': de.getDate(),
+                      'month': de.getMonth()+1,
+                      'year': de.getFullYear(),
+                      'hour': de.getHours(),
+                      'minute': de.getMinutes(),
+                      'second': de.getSeconds(),
+                      'type': type
+                    };
+                  };
                   data.random.forEach(element => {
-                    console.log(new Date(element.ts/1000));
+                    dates.push(dateExplode(element.ts, 'random'));
                   });
+                  data.password.forEach(element => {
+                    dates.push(dateExplode(element.ts, 'password'));
+                  });
+                  data.uuid.forEach(element => {
+                    dates.push(dateExplode(element.ts, 'uuid'));
+                  });
+                  data.wordlist.forEach(element => {
+                    dates.push(dateExplode(element.ts, 'wordlist'));
+                  });
+                  let filterByMonth = dates.filter(element => element.month === new Date().getMonth()+1);
+                  console.log(_.groupBy(filterByMonth, 'type'));
+                  let td = _.map(_.groupBy(filterByMonth, 'day'), function (arr, day) { 
+                    return { 
+                      'count': arr.length,
+                      'day': day
+                    }; 
+                  });
+
+                    // init chartjs
+                    const ctx = document.getElementById('myChart').getContext('2d');
+                    const myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: _.pluck(td, 'day'),
+                            datasets: [{
+                                label: '# of Calls',
+                                data: _.pluck(td, 'count'),
+                                backgroundColor: [
+                                    'rgba(255, 99, 132, 0.2)',
+                                ],
+                                borderColor: [
+                                    'rgba(255, 99, 132, 1)',
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
                 });
             });
         </script>
@@ -184,6 +243,7 @@
           <div class="container">
               <div class="row">
                   <div class="col mt-2">
+                    <canvas id="myChart" width="400" height="400"></canvas>
                   </div>
                   <div class="col mt-5"></div>
               </div>
