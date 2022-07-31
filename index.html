@@ -94,7 +94,7 @@
                     let de = new Date(dateAsString/1000);
                     return {
                       'day': de.getDate(),
-                      'month': de.getMonth()+1,
+                      'month': de.getMonth(),
                       'year': de.getFullYear(),
                       'hour': de.getHours(),
                       'minute': de.getMinutes(),
@@ -114,8 +114,17 @@
                   data.wordlist.forEach(element => {
                     dates.push(dateExplode(element.ts, 'wordlist'));
                   });
-                  let filterByMonth = dates.filter(element => element.month === new Date().getMonth()+1);
-                  console.log(_.groupBy(filterByMonth, 'type'));
+                  let filterByMonth = dates.filter(element => element.month <= 11); //=== new Date().getMonth()+1);
+                  //
+                  var allItems = _.groupBy(filterByMonth, 'type');
+                  console.log(allItems);
+                  console.log(_.map(_.groupBy(allItems.password, 'day'), function (arr, day) {
+                    return {
+                      'count': arr.length,
+                      'day': day
+                    };
+                }));
+                  //
                   let td = _.map(_.groupBy(filterByMonth, 'day'), function (arr, day) { 
                     return { 
                       'count': arr.length,
@@ -128,7 +137,7 @@
                     const myChart = new Chart(ctx, {
                         type: 'bar',
                         data: {
-                            labels: _.pluck(td, 'day'),
+                            labels: _.range(1, 32), //_.pluck(td, 'day'),
                             datasets: [{
                                 label: '# of Calls',
                                 data: _.pluck(td, 'count'),
