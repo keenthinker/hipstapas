@@ -88,8 +88,6 @@
                 await fetch("/api/stats")
                 .then(response => response.json())
                 .then(data => {
-                  //console.log(data);
-                  let dates = [];
                   let dateExplode = function (dateAsString, type) {
                     let de = new Date(dateAsString/1000);
                     return {
@@ -102,53 +100,40 @@
                       'type': type
                     };
                   };
-                  data.random.forEach(element => {
-                    dates.push(dateExplode(element.ts, 'random'));
-                  });
-                  data.password.forEach(element => {
-                    dates.push(dateExplode(element.ts, 'password'));
-                  });
-                  data.uuid.forEach(element => {
-                    dates.push(dateExplode(element.ts, 'uuid'));
-                  });
-                  data.wordlist.forEach(element => {
-                    dates.push(dateExplode(element.ts, 'wordlist'));
+                  let dates = [];
+                  _.map(_.keys(data), type => {
+                      data[type].forEach(element => {
+                        dates.push(dateExplode(element.ts, type));
+                    });
                   });
                   let filterByMonth = dates.filter(element => element.month <= 11); //=== new Date().getMonth()+1);
                   //
                   var allItems = _.groupBy(filterByMonth, 'type');
-                  console.log(allItems);
-                  let passwordsOnly = _.map(_.groupBy(allItems.password, 'day'), function (arr, day) {
-                    return {
-                      'count': arr.length,
-                      'day': day
-                    };
-                  });
-                  let uuidsOnly = _.map(_.groupBy(allItems.uuid, 'day'), function (arr, day) {
-                    return {
-                      'count': arr.length,
-                      'day': day
-                    };
-                  });
-                  let wordlistsOnly = _.map(_.groupBy(allItems.wordlist, 'day'), function (arr, day) {
-                    return {
-                      'count': arr.length,
-                      'day': day
-                    };
-                  });
-                  let randomsOnly = _.map(_.groupBy(allItems.random, 'day'), function (arr, day) {
-                    return {
-                      'count': arr.length,
-                      'day': day
-                    };
-                  });
+                  function empty(day) { 
+                    return { 'count': 0, 'day': day};
+                  }
+                  let daysInMonth = _.chain(_.range(1,32)).map(x => empty(x)).value();
+                  console.log(daysInMonth);
+                  console.log(_.keys(_.groupBy(allItems.password, 'day')));
+                  function lenghtAndCountTuple (items) {
+                    return _.map(_.groupBy(allItems.password, 'day'), function (arr, day) {
+                      return {
+                        'count': arr.length,
+                        'day': day
+                      };
+                    });
+                  }
+                  let passwordsOnly = lenghtAndCountTuple(allItems.password);
+                  let uuidsOnly = lenghtAndCountTuple(allItems.uuid);
+                  let wordlistsOnly = lenghtAndCountTuple(allItems.wordlist);
+                  let randomsOnly = lenghtAndCountTuple(allItems.random);
                   //
-                  let td = _.map(_.groupBy(filterByMonth, 'day'), function (arr, day) { 
-                    return { 
-                      'count': arr.length,
-                      'day': day
-                    }; 
-                  });
+                  // let td = _.map(_.groupBy(filterByMonth, 'day'), function (arr, day) { 
+                  //   return { 
+                  //     'count': arr.length,
+                  //     'day': day
+                  //   }; 
+                  // });
 
                     // init chartjs
                     const ctx = document.getElementById('myChart').getContext('2d');
@@ -195,6 +180,7 @@
                           scales: {
                               x: {
                                   stacked: true,
+                                  title: { display: true, text: 'days of month' }
                               },
                               y: {
                                   stacked: true
