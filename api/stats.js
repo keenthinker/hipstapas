@@ -4,6 +4,13 @@ function byIndex(query, indexName) {
         query.Lambda("v", query.Get(query.Var("v"))));
 }
 
+function byTimestampDesc(query) {
+    // Map(Paginate(Match(Index("entriesByTsDesc"))), Lambda(["x", "ref"], Get(Var("ref"))))
+    return query.Map(
+        query.Paginate(query.Match(query.Index("entriesByTsDesc")), { size: 1000 }),
+        query.Lambda(["x", "ref"], query.Get(query.Var("ref"))));
+}
+
 function writeContentToFile(fileName, content) {
     var fs = require("fs");
     fs.writeFile(fileName, content, function (err) {
@@ -50,6 +57,9 @@ module.exports = async (req, res) => {
             const faunadb = require('faunadb');
             const client = new faunadb.Client({ secret: process.env.HIPSTAPAS_FAUNADB_KEY, keepAlive: false });
             const query = faunadb.query;
+
+            // var ts = await client.query(byTimestampDesc(query));
+            // res.status(200).send(ts);
 
             // var r = await client.query(
             //             query.Map(
