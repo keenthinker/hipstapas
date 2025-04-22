@@ -1,11 +1,14 @@
 /**
+ * FaunaDB has been sunset and is no longer used in the project.
+ * This module is kept for reference and will be removed in the future.
+ * 
  * Logs the specified parameters to the configured collection in FaunaDB.
  * Instead of using some analytics and remove unwanted data before saving it (like IP, browser, location, query and so on), 
  * store the endpoint name and the status for statistics. The data will be visualized on the main hipstapas.dev page. 
  * @param {*} endpointName 
  * @param {*} httpCode 
  */
-function logEndpointCall(endpointName, httpCode) {
+function logEndpointCallOBSOLETE(endpointName, httpCode) {
 
     let error;
     try {
@@ -24,6 +27,10 @@ function logEndpointCall(endpointName, httpCode) {
     }
 
     return Promise.reject({ 'error' : `D'oh: ${error}`});
+}
+
+function logEndpointCall(endpointName, httpCode) {
+    return Promise.resolve({ 'message': `${endpointName} endpoint called with HTTP code ${httpCode}` });
 }
 
 module.exports = { logEndpointCall };
