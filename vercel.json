@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "routes": [ 
+		{ "src": "/index", "dest": "/index.html"},
+		{ "src": "/docs", "dest": "/docs.html"},
+		{ "src": "/playground", "dest": "/playground.html"},
+		{ "src": "/privacy", "dest": "/privacy.html"},
+		{ "src": "/contact", "dest": "/contact.html"},
+		{ "handle": "filesystem" },
+		{ "src": "/(.*)", "status": 404, "dest": "/index.html" }
+	],
+    "env": {
+		"HIPSTAPAS_FAUNADB_KEY": "@hipstapas-faunadb-key",
+		"HIPSTAPAS_FAUNADB_COLLECTION": "@hipstapas-faunadb-collection"
+    }
+}

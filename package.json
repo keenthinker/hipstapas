@@ -1,0 +1,32 @@
+{
+  "name": "hipstapas",
+  "version": "1.2.0",
+  "description": "Hipster Password Software as a Service - https://hipstapas.dev",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/keenthinker/hipstapas.git"
+  },
+  "dependencies": {
+    "faunadb": "^4.0.2",
+    "hipstapas.core": "^1.1.2"
+  },
+  "keywords": [
+    "saas",
+    "hipstapas",
+    "password",
+    "uuid",
+    "wordlist",
+    "random",
+    "hipstapas.dev"
+  ],
+  "author": "keenthinker.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/keenthinker/hipstapas/issues"
+  },
+  "homepage": "https://github.com/keenthinker/hipstapas#readme"
+}

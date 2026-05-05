@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        
+		<title>hipstapas.dev</title>
+        
+        <meta name="description" content="Create secure strings like a pro with the hipster password as a service." />
+		<meta name="keywords" content="saas,password,software as a service,hipstapas,hipster,service,cloud" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
+        <meta property="og:title" content="hipstapas.dev" />
+        <meta property="og:description" content="Create secure strings like a pro with the hipster password as a service." />
+        <meta property="og:image" content="https://hipstapas.dev/images/logo_white_250x90.png" />
+        <meta property="og:url" content="https://hipstapas.dev/" />
+        <meta property="og:type" content="website" />
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha256-aAr2Zpq8MZ+YA/D6JtRD3xtrwpEz2IqOS+pWD/7XKIw=" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
+
+        <style>
+          .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+          }
+    
+          @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+              font-size: 3.5rem;
+            }
+          }
+        </style>
+        <style>
+            main > .container {
+              padding: 60px 15px 0;
+              }
+          
+          .footer {
+            background-color: #f5f5f5;
+          }
+          
+          .footer > .container {
+            padding-right: 15px;
+            padding-left: 15px;
+          }
+
+          .footer .link {
+            color: #fff;
+          }
+          
+          code {
+            font-size: 80%;
+          }
+
+          .table .documentation {
+            font-size: 80%;
+            border-bottom: solid 2px #afafaf;
+          }
+          
+          @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+                      body {
+                          font-family: 'Roboto Mono', monospace;
+                          font-size: x-large;
+                          color:rgb(62, 77, 218);
+                      }
+          
+          .bg-dark {
+              background-color: rgb(62, 77, 218) !important;
+          }
+          .footer {
+              background-color: rgb(62, 77, 218) !important; /* 3e4dda */
+          }
+    
+          .redunderline {
+            border-bottom: 0.1em solid #ff0000;
+          }
+        </style>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js" integrity="sha512-WNLxfP/8cVYL9sj8Jnp6et0BkubLP31jhTG9vhL/F5uEZmg5wEzKoXp1kJslzPQWwPT1eyMiSxlKCgzHLOTOTQ==" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.min.js" integrity="sha256-Xt8pc4G0CdcRvI0nZ2lRpZ4VHng0EoUDMlGcBSQ9HiQ=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
+        <script>    
+            $(document).ready(async () => {
+                console.log("ready to rumble.");
+            });
+        </script>
+    </head>
+    <body class="d-flex flex-column h-100">
+      <header>
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark navbar-custom">
+      <a class="navbar-brand" href="/">hipstapas<span style="color: #ff0000;">.</span>dev</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Start <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/#about">About</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="">Documentation</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/playground">Playground</a>
+          </li>
+          <li>
+            <a class="nav-link" href="https://github.com/keenthinker/hipstapas" target="_blank" rel="noopener">Source</a>
+          </li>
+        </ul>
+        <span class="navbar-text"><img src="images/logo_transparent_250x90.png" width="80%" alt="hipstapas logo"></span>
+      </div>
+    </nav>
+  </header>
+  
+  <main role="main" class="flex-shrink-0">
+    
+          <div class="container">
+              <div class="row">
+                  <div class="col">
+                      <h1 class="mt-5">API Documentation</h1>
+                      <p><a href="#methods">1. Supported HTTP methods</a></p>
+                      <p><a href="#options">2. Generation options</a></p>
+                      <p><a href="#endpoints">3. Endpoints</a></p>
+                      <p><a href="#password">3.1 Password</a></p>
+                      <p><a href="#uuid">3.2 UUID</a></p>
+                      <p><a href="#wordlist">3.3 EFF wordlist</a></p>
+                      <p><a href="#random">3.4 Random number</a></p>
+                      <p><a href="#policy">4. Custom policy</a></p>
+                      <p><a href="#apidefinition">5. API definition (OpenAPI / Swagger)</a></p>
+                  </div>
+                  <div class="col mt-4">
+                      <img class="img-fluid" src="images/undraw_File_bundle_xl7g.svg" alt="image showing documents that are connected">
+                  </div>
+              </div>
+          </div>
+
+          <div class="container">
+            <div class="row">
+                <div class="col">
+                  <h2 id="methods">1. Supported HTTP methods</h2>
+                  <p>Currently all API endpoints are supporting only the HTTP GET method. 
+                    Accepting HTTP POST is work in progress.
+                    <table class="table table-striped table-bordered table-sm">
+                      <thead><th>Base API address</th></thead>
+                      <tbody>
+                      <tr><td>https://hipstapas.dev/api</td></tr>
+                    </tbody>
+                    </table>
+                  </p>
+                  <h2 id="options">2. Generation options</h2>
+                  <p>Since currently only GET methods exists, all options should be set using <b>query parameters</b>. 
+                    Every endpoint supports a <b>resultsCount</b> query parameter, that controls how many items are returned at once. 
+                    <br />
+                    Example: <a href="https://hipstapas.dev/api/?resultsCount=5" target="_blank" rel="noopener">https://hipstapas.dev/api/?resultsCount=5</a> 
+                    generates 5 phrases at once and returns a JSON array containing the newly generated strings. 
+                    <br />
+                    For query parameters of type boolean that are not explicitely specified, <b>true</b> is always the default option.</p>
+                  <h2 id="endpoints">3. Endpoints</h2>  
+                  <h2 id="password">3.1 Password - the default endpoint (/index)</h2>
+                    <p>The easiest way to generate a strong phrase is to call the base API address - call <a href="https://hipstapas.dev/api" target="_blank" rel="noopener">https://hipstapas.dev/api</a> to generate a new password. 
+                      That's it! You just created a password using the default options (alphabet consists of small, capital, numbers and special charactes, min. length is 16 and max. length is 32 characters).
+                    <br/>Options: 
+                    <table class="table table-striped table-bordered table-sm">
+                      <thead>
+                        <tr>
+                          <th>Parameter name</th>
+                          <th>Type</th>
+                          <th>Allowed values</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr><td>alphabetSmall</td><td>Boolean</td><td>true|false</td></tr>
+                        <tr><td colspan="3" class="documentation">If set to <b>true</b> the generation alphabet contains small characters: <em>abcdefghijklmnopqrstuvwxyz</em></td></tr>
+                        <tr><td>alphabetCapital</td><td>Boolean</td><td>true|false</td></tr>
+                        <tr><td colspan="3" class="documentation">If set to <b>true</b> the generation alphabet contains capital characters: <em>ABCDEFGHIJKLMNOPQRSTUVWXYZ</em></td></tr>
+                        <tr><td>alphabetNumber</td><td>Boolean</td><td>true|false</td></tr>
+                        <tr><td colspan="3" class="documentation">If set to <b>true</b> the generation alphabet contains numbers: <em>0123456789</em></td></tr>
+                        <tr><td>alphabetSpecial</td><td>Boolean</td><td>true|false</td></tr>
+                        <tr><td colspan="3" class="documentation">If set to <b>true</b> the generation alphabet contains special characters: <em>.,+-*/!?;:{}()[]%$&~#@|</em></td></tr>
+                        <tr><td>lengthMin</td><td>Number</td><td>1..2048</td></tr>
+                        <tr><td colspan="3" class="documentation">Defines the minimal length of the generated phrase</td></tr>
+                        <tr><td>lengthMax</td><td>Number</td><td>1..2048</td></tr>
+                        <tr><td colspan="3" class="documentation">Defines the maximal length of the generated phrase</td></tr>
+                        <tr><td>resultsCount</td><td>Number</td><td>1..100</td></tr>     
+                        <tr><td colspan="3" class="documentation">Defines how many results should be generated at once</td></tr>                   
+                      </tbody>
+                    </table>
+                    Example call to: 
+                    <ul>
+                      <li>generate 5 phrases at once</li>
+                      <li>where each phrase is exactly 5 characters long</li>
+                      <li>excluding special and capital characters (in other words - using only small characters and numbers)</li>
+                    </ul>
+                    <a href="https://hipstapas.dev/api?lengthMin=5&lengthMax=5&resultsCount=5&alphabetSpecial=false&alphabetCapital=false" target="_blank" rel="noopener">
+                      https://hipstapas.dev/api
+                    </br>?resultsCount=5
+                    </br>&lengthMin=5
+                    </br>&lengthMax=5
+                    </br>&alphabetSpecial=false
+                    </br>&alphabetCapital=false</a>.
+                    </p>
+                    <h2 id="uuid">3.2 Generating UUID (/uuid)</h2>
+                    <p>Call <a href="https://hipstapas.dev/api/uuid" target="_blank" rel="noopener">https://hipstapas.dev/api/uuid</a> to generate a new (version 4) uuid. That's it!
+                    </br>Options:
+                    <table class="table table-striped table-bordered table-sm">
+                      <thead>
+                        <tr>
+                          <th>Parameter name</th>
+                          <th>Type</th>
+                          <th>Allowed values</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr><td>resultsCount</td><td>Number</td><td>1..100</td></tr>
+                        <tr><td colspan="3" class="documentation">Defines how many results should be generated at once</td></tr>
+                      </tbody>
+                    </table>
+                  </p>
+                    <h2 id="wordlist">3.3 EFF wordlist (/wordlist)</h2>
+                    <p>Call <a href="https://hipstapas.dev/api/wordlist" target="_blank" rel="noopener">https://hipstapas.dev/api/wordlist</a> to create a passphrase from 6 words (as described and suggested by EFF <a href="https://www.eff.org/de/dice">https://www.eff.org/de/dice</a>). 
+                      This is the default option. The count of the words per passphrase can be set between <b>1</b> and <b>50</b> using the query parameter <b>words</b>, 
+                      e.g. <a href="https://hipstapas.dev/api/wordlist?words=3" target="_blank" rel="noopener">https://hipstapas.dev/api/wordlist/?words=3</a>.
+                    </br>Options:
+                    <table class="table table-striped table-bordered table-sm">
+                      <thead>
+                        <tr>
+                          <th>Parameter name</th>
+                          <th>Type</th>
+                          <th>Allowed values</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr><td>words</td><td>Number</td><td>1..50</td></tr>
+                        <tr><td colspan="3" class="documentation">Defines the count of the words per passphrase</td></tr>
+                        <tr><td>resultsCount</td><td>Number</td><td>1..100</td></tr>
+                        <tr><td colspan="3" class="documentation">Defines how many results should be generated at once</td></tr>
+                      </tbody>
+                    </table>
+                  </p>
+
+                  <h2 id="random">3.4 Random number (/random)</h2>
+                  <p>Call <a href="https://hipstapas.dev/api/random" target="_blank" rel="noopener">https://hipstapas.dev/api/random</a> to create a random number between <b>1</b> and <b>1048576</b>. 
+                    The default values are:
+                    <ul>
+                      <li>min=1</li>
+                      <li>max=1</li>
+                      <li>sort=false</li>
+                      <li>noDuplicates=false</li>
+                      <li>resultsCount=1</li>
+                    </ul>
+                    Options:
+                  <table class="table table-striped table-bordered table-sm">
+                    <thead>
+                      <tr>
+                        <th>Parameter name</th>
+                        <th>Type</th>
+                        <th>Allowed values</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>min</td><td>Number</td><td>1..1048576</td></tr>
+                      <tr><td colspan="3" class="documentation">Defines the lower bound of the number generator</td></tr>
+                      <tr><td>max</td><td>Number</td><td>1..1048576</td></tr>
+                      <tr><td colspan="3" class="documentation">Defines the upper bound of the number generator</td></tr>
+                      <tr><td>sort</td><td>Boolean</td><td>true|false</td></tr>
+                      <tr><td colspan="3" class="documentation">Sorts the generated number sequence</td></tr>
+                      <tr><td>noDuplicates</td><td>Boolean</td><td>true|false</td></tr>
+                      <tr><td colspan="3" class="documentation">The generated number sequence should contain only unique numbers</td></tr>
+                      <tr><td>resultsCount</td><td>Number</td><td>1..100</td></tr>
+                      <tr><td colspan="3" class="documentation">Defines how many results should be generated at once</td></tr>
+                    </tbody>
+                  </table>
+                </p>
+
+                  <h2 id="policy">4. Custom policy</h2>
+                  <p>WIP</p>
+                  <h2 id="apidefinition">5. API definition (OpenAPI / Swagger)</h2>
+                  <p>The hipstapas API definition: 
+                    <ul>
+                      <li><a href="apidefinition.yaml">apidefinition.yaml</a></li>
+                      <li><a href="apidefinition.json">apidefinition.json</a></li>
+                    </ul></p>
+                </div>
+            </div>
+        </div>
+
+  </main>
+  
+  <footer class="footer mt-auto py-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12 col-lg">
+          <a href="/privacy" class="link">Privacy</a>
+          <a href="/contact" class="link">Contact</a>
+          <span>✍</span>
+          <a href="https://keenthinker.com" class="link" target="_blank" rel="noopener">keenthinker.com</a>
+          <a href="https://twitter.com/hipstapas" target="_blank" rel="noopener"><span class="link"><i class="fab fa-twitter-square"></i></span></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  </body>
+  
+</html>
