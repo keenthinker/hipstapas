@@ -1,6 +1,6 @@
 const { password } = require('hipstapas.core')
 const { firstItemIfArrayHasLengthOne, executeIfConditionIsMet, evaluateBooleanQueryParameter } = require('../modules/utils');
-const { logEndpointCall } = require('../modules/faunadblogger');
+const { logEndpointCall } = require('../modules/logger');
 
 module.exports = async (req, res) => {
     let resultsCount = 1;
