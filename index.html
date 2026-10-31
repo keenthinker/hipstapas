@@ -1,200 +1,286 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        
-		<title>hipstapas.dev</title>
-        
-        <meta name="description" content="Create secure strings like a pro with the hipster password as a service." />
-		    <meta name="keywords" content="saas,password,software as a service,hipstapas,hipster,service,cloud" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        
-        <meta property="og:title" content="hipstapas.dev" />
-        <meta property="og:description" content="Create secure strings like a pro with the hipster password as a service." />
-        <meta property="og:image" content="https://hipstapas.dev/images/logo_white_250x90.png" />
-        <meta property="og:url" content="https://hipstapas.dev/" />
-        <meta property="og:type" content="website" />
-
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha256-aAr2Zpq8MZ+YA/D6JtRD3xtrwpEz2IqOS+pWD/7XKIw=" crossorigin="anonymous" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
-
-        <style>
-          .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-          }
+<html lang="en" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-          @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-              font-size: 3.5rem;
-            }
-          }
-        </style>
-        <style>
-            main > .container {
-              padding: 60px 15px 0;
-              }
-          
-          .footer {
-            background-color: #f5f5f5;
-          }
-          
-          .footer > .container {
-            padding-right: 15px;
-            padding-left: 15px;
-          }
+    <title>hipstapas.dev - Password as a Service for Hipsters</title>
+    
+    <meta name="description" content="Create secure strings like a pro with the hipster password as a service." />
+    <meta name="keywords" content="saas,password,software as a service,hipstapas,hipster,service,cloud" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://hipstapas.dev/" />
+    <meta property="og:title" content="hipstapas.dev" />
+    <meta property="og:description" content="Create secure strings like a pro with the hipster password as a service." />
+    <meta property="og:image" content="https://hipstapas.dev/images/logo_white_250x90.png" />
 
-          .footer .link {
-            color: #fff;
-          }
-          
-          code {
-            font-size: 80%;
-          }
-          
-          @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
-                      body {
-                          font-family: 'Roboto Mono', monospace;
-                          font-size: x-large;
-                          color:rgb(62, 77, 218);
-                      }
-          
-          .bg-dark {
-              background-color: rgb(62, 77, 218) !important;
-          }
-          .footer {
-              background-color: rgb(62, 77, 218) !important; /* 3e4dda */
-          }
+    <!-- Google Fonts: Roboto Mono für den Dev/Hipster-Vibe -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com" rel="stylesheet">
+
+    <!-- Bootstrap 5.3.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     
-          .redunderline {
-            border-bottom: 0.1em solid #ff0000;
-          }
-        </style>
-    
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js" integrity="sha512-WNLxfP/8cVYL9sj8Jnp6et0BkubLP31jhTG9vhL/F5uEZmg5wEzKoXp1kJslzPQWwPT1eyMiSxlKCgzHLOTOTQ==" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.min.js" integrity="sha256-Xt8pc4G0CdcRvI0nZ2lRpZ4VHng0EoUDMlGcBSQ9HiQ=" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
-        <script>    
-            $(document).ready(async () => {
-                console.log("ready to rumble.");
-            });
-        </script>
-    </head>
-    <body class="d-flex flex-column h-100">
-      <header>
-      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark navbar-custom">
-      <a class="navbar-brand" href="/">hipstapas<span style="color: #ff0000;">.</span>dev</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="/">Start <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#about">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/docs">Documentation</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/playground">Playground</a>
-          </li>
-          <li>
-            <a class="nav-link" href="https://github.com/keenthinker/hipstapas" target="_blank" rel="noopener">Source</a>
-          </li>
-        </ul>
-        <span class="navbar-text"><img src="images/logo_transparent_250x90.png" width="80%" alt="hipstapas logo"></span>
+    <!-- FontAwesome 6.5.1 (Modernere Icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        :root, [data-bs-theme="light"] {
+            --bs-body-bg: #fafafa;
+            --bs-body-color: #1a1a1a;
+            --bs-primary: rgb(62, 77, 218);
+            --accent-gradient: linear-gradient(135deg, rgb(62, 77, 218), #9d4edd);
+            --card-bg: #ffffff;
+            --card-border: rgba(0, 0, 0, 0.06);
+            --nav-bg: rgba(250, 250, 250, 0.8);
+        }
+
+        [data-bs-theme="dark"] {
+            --bs-body-bg: #0b0c10;
+            --bs-body-color: #f5f5f7;
+            --bs-primary: rgb(110, 123, 255);
+            --accent-gradient: linear-gradient(135deg, rgb(110, 123, 255), #c77dff);
+            --card-bg: #13151a;
+            --card-border: rgba(255, 255, 255, 0.05);
+            --nav-bg: rgba(11, 12, 16, 0.8);
+        }
+
+        body {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 1rem;
+            letter-spacing: -0.02em;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Schwebender Glaseffekt für die Navbar */
+        .navbar-slick {
+            background: var(--nav-bg) !important;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--card-border);
+            transition: all 0.3s ease;
+        }
+
+        /* Subtiler, moderner Akzent-Strich statt klobigem Unterstrich */
+        .redunderline {
+            position: relative;
+            white-space: nowrap;
+        }
+        .redunderline::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 100%;
+            height: 3px;
+            background: #ff0000;
+            border-radius: 2px;
+        }
+
+        /* Slick Card Layouts für Sektionen */
+        .slick-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.01);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .slick-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(62, 77, 218, 0.04);
+        }
+
+        /* Text gradient für Überschriften */
+        .text-gradient {
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Tech-Listendesign */
+        .tech-list li {
+            border-left: 2px solid var(--card-border);
+            padding-left: 1.5rem;
+            transition: border-color 0.3s ease;
+        }
+        .tech-list li:hover {
+            border-left-color: var(--bs-primary);
+        }
+
+        main {
+            flex: 1;
+            padding-top: 5.5rem;
+        }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            console.log("Ready to rumble! 🚀");
+            bindThemeSwitcher();
+        });
+    </script>
+</head>
+<body class="d-flex flex-column h-100">
+  <header>
+    <!-- Navbar ist jetzt transparent, verschmilzt mit dem Hintergrund und nutzt dunklen Text im Light Mode -->
+    <nav class="navbar navbar-expand-md navbar-slick fixed-top py-3">
+      <div class="container">
+        <a class="navbar-brand fw-bold text-body" href="/">hipstapas<span class="text-danger">.</span>dev</a>
+        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            <li class="nav-item"><a class="nav-link text-body opacity-75 active" href="/">Start</a></li>
+            <li class="nav-item"><a class="nav-link text-body opacity-75" href="#about">About</a></li>
+            <li class="nav-item"><a class="nav-link text-body opacity-75" href="/docs">Documentation</a></li>
+            <li class="nav-item"><a class="nav-link text-body opacity-75" href="/playground">Playground</a></li>
+            <li class="nav-item">
+              <a class="nav-link text-body opacity-75" href="https://github.com/keenthinker/hipstapas" target="_blank" rel="noopener">
+                <i class="fab fa-github me-1"></i>Source
+              </a>
+            </li>
+          </ul>
+
+          <div class="d-flex align-items-center gap-3">
+            <a href="#" id="themeToggle" class="nav-link p-2 text-body" aria-label="Toggle theme">
+              <i id="themeIcon" class="fas fa-moon"></i>
+            </a>
+            <!-- Logo wechselt je nach Theme -->
+            <div class="navbar-text d-none d-md-block opacity-75" style="max-width: 100px;">
+              <img id="themeLogo" src="images/logo_white_250x90.png" class="img-fluid" alt="hipstapas logo">
+            </div>
+          </div>
+        </div>
       </div>
     </nav>
   </header>
   
-  <main role="main" class="flex-shrink-0">
-    
-          <div class="container">
-              <div class="row">
-                  <div class="col mt-2">
-                      <h1 class="mt-5"><span class="redunderline">********</span> as a service👌</h1>
-                      <p>Create secure passwords with ease!</p>
-                  </div>
-                  <div class="col mt-4">
-                      <img class="img-fluid" src="images/undraw_safe_bnk7.svg" alt="image of documents secured with a lock">
-                  </div>
-              </div>
+  <main class="flex-shrink-0">
+    <!-- HERO SECTION: Moderner Spacing-Aufbau mit Badge-Indikator -->
+    <section class="py-5 my-md-4">
+      <div class="container">
+        <div class="row align-items-center g-5">
+          <div class="col-md-6 text-center text-md-start">
+            <span class="badge rounded-pill px-3 py-2 mb-3 bg-secondary bg-opacity-10 text-primary border border-primary border-opacity-10 fs-7">
+              ✨ Version 1.3.0
+            </span>
+            <h1 class="display-3 fw-bold mb-3 tracking-tight text-body">
+              <span class="redunderline">********</span> <br><span class="text-gradient">as a service</span> 👌
+            </h1>
+            <p class="fs-5 text-muted fw-light">Create production-grade secure strings instantly.</p>
           </div>
-          <div class="container">
-              <div class="row">
-                  <div class="col mt-2">
-                      <h1>Why <span class="redunderline">trust</span> an online service?</h1>
-                      <p>Because hipstapas<span style="color: #ff0000;">.</span>dev is:</p>
-                      <p>
-                          <ul>
-                              <li><span style="color: #ff0000;">T</span>ransparent <span class="d-none d-xs-none d-md-inline d-lg-inline d-xl-inline">(<a href="https://github.com/keenthinker/hipstapas" target="_blank" rel="noopener">open source</a>)</span></li>
-                              <li><span style="color: #ff0000;">R</span>eliable <span class="d-none d-xs-none d-md-inline d-lg-inline d-xl-inline">(<a href="https://vercel.com" target="_blank" rel="noopener">hosted in the cloud</a>)</span></li>
-                              <li><span style="color: #ff0000;">U</span>ser-friendly <span class="d-none d-xs-none d-md-inline d-lg-inline d-xl-inline">(0 <a href="https://hipstapas.dev/docs" target="_blank" rel="noopener">configuration</a> and it just <a href="https://hipstapas.dev/api" target="_blank" rel="noopener">works</a>)</span></li>
-                              <li><span style="color: #ff0000;">S</span>ecure <span class="d-none d-xs-none d-md-inline d-lg-inline d-xl-inline">(<a href="https://github.com/keenthinker/hipstapas" target="_blank" rel="noopener">no analytics, no cookies</a>)</span></li>
-                              <li><span style="color: #ff0000;">T</span>rustworthy <span class="d-none d-xs-none d-md-inline d-lg-inline d-xl-inline">(<a href="https://github.com/keenthinker/hipstapas" target="_blank" rel="noopener">certified by the crowd</a>)</span></li>
-                          </ul>
-                      </p>
-                  </div>
-              </div>
+          <div class="col-md-6">
+            <!-- Schwebender Grafikcontainer -->
+            <div class="p-4 slick-card bg-opacity-50 text-center">
+              <img class="img-fluid mx-auto d-block" style="max-height: 240px; filter: drop-shadow(0px 10px 20px rgba(0,0,0,0.05));" src="images/undraw_safe_bnk7.svg" alt="Secured assets">
+            </div>
           </div>
+        </div>
+      </div>
+    </section>
 
-          <a href="" id="about"></a>
-          <div class="container">
-              <div class="row">
-                  <div class="col mt-2">
-                      <h1>What is <span class="redunderline">hipstapas<span style="color: #ff0000;">.</span>dev</span>?</h1>
-                      <p>👉Hipster Password <span style="color: #ff0000;">S</span>oftware <span style="color: #ff0000;">a</span>s <span style="color: #ff0000;">a</span> <span style="color: #ff0000;">S</span>ervice</p>
-                      <p>💡Transparent, open source, highly configurable REST API for generating random phrases with tons of different options and a default one. Description of the API definition: <a href="apidefinition.yaml">apidefinition.yaml</a>.</p>
-                      <p>❓Secure phrases generation is always needed. There are a lot of autonomous applications and services running in the background that need to have rotating passwords.</p>
-                      <p>👩‍💻Using a standard REST API the process of creating passwords can be automated whenever needed. Mobile, web and desktop applications can utilise the API to support the users for such repetative tasks that need to produce unique and strong output.</p>
-                      <p>💻Use the service straight from the terminal with the help of the companion app <a href="https://github.com/keenthinker/hipstapas.cli" target="_blank" rel="noopener">hipstapas CLI</a>.</p>
-                      <p>📦Use the service functionality <b>offline</b> with the help of the npm package <a href="https://www.npmjs.com/package/hipstapas.core" target="_blank" rel="noopener">hipstapas.core</a>.</p>
-                      <p>🌍A description of the different options can be found on the <a href="/docs">documentation</a> page.
-                        <img class="img-fluid" src="/images/PasswordAsAService_MindMap_Features.png" alt="PasswordAsAService mindmap features"/>
-                      </p>
-                  </div>
-              </div>
+    <!-- TRUST SECTION -->
+    <section class="py-5 my-4">
+      <div class="container">
+        <div class="slick-card p-5">
+          <div class="row">
+            <div class="col-lg-8 mx-auto">
+              <h2 class="h3 fw-bold mb-4 text-body">Why <span class="redunderline">trust</span> an online service?</h2>
+              <p class="text-muted mb-4">The core pillars of hipstapas<span class="text-danger">.</span>dev:</p>
+              
+              <ul class="list-unstyled tech-list lh-xl fs-5">
+                <li class="mb-4">
+                  <strong class="text-danger">T</strong>ransparent 
+                  <span class="d-block d-sm-inline text-muted fs-6 ms-sm-2"> Fully open source. <a href="https://github.com/keenthinker/hipstapas" target="_blank" rel="noopener" class="text-primary text-decoration-none">Review the code</a></span>
+                </li>
+                <li class="mb-4">
+                  <strong class="text-danger">R</strong>eliable 
+                  <span class="d-block d-sm-inline text-muted fs-6 ms-sm-2"> Serverless cloud deployment. <a href="https://vercel.com" target="_blank" rel="noopener" class="text-primary text-decoration-none">99.9% Uptime</a></span>
+                </li>
+                <li class="mb-4">
+                  <strong class="text-danger">U</strong>ser-friendly 
+                  <span class="d-block d-sm-inline text-muted fs-6 ms-sm-2"> Zero configuration required. <a href="/api" target="_blank" rel="noopener" class="text-primary text-decoration-none">It just works</a></span>
+                </li>
+                <li class="mb-4">
+                  <strong class="text-danger">S</strong>ecure 
+                  <span class="d-block d-sm-inline text-muted fs-6 ms-sm-2"> Strict privacy. <a href="https://github.com/keenthinker/hipstapas" target="_blank" rel="noopener" class="text-primary text-decoration-none">No tracking scripts. No analytics cookies.</a></span>
+                </li>
+                <li class="mb-4">
+                  <strong class="text-danger">T</strong>rustworthy 
+                  <span class="d-block d-sm-inline text-muted fs-6 ms-sm-2"> Verified by the <a href="https://github.com/keenthinker/hipstapas" target="_blank" rel="noopener" class="text-primary text-decoration-none">developer community</a>.</span>
+                </li>
+              </ul>
+            </div>
           </div>
+        </div>
+      </div>
+    </section>
 
-          <!-- <div class="container">
-              <div class="row">
-                  <div class="col mt-2">
-                      <h1>Want to stay in touch?</h1>
-                      <p>Newsletter ...</p>
-                  </div>
+    <!-- ABOUT SECTION -->
+    <section id="about" class="py-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-9 mx-auto">
+            <h2 class="h3 fw-bold mb-4 text-body">What is <span class="redunderline">hipstapas<span class="text-danger">.</span>dev</span>?</h2>
+            
+            <div class="mb-5 p-4 bg-primary bg-opacity-10 text-primary rounded-4 border border-primary border-opacity-10">
+              <p class="mb-0 fs-5">👉 <strong>Hipster Password <span class="text-danger">S</span>oftware <span class="text-danger">a</span>s <span class="text-danger">a</span> <span class="text-danger">S</span>ervice</strong></p>
+            </div>
+            
+            <div class="text-muted lh-base fs-5 fw-light">
+              <p class="mb-4">💡 Transparent, open source, highly configurable REST API for generating random phrases with tons of different options and a default one. Description of the API definition: <a href="apidefinition.yaml" class="text-primary text-decoration-none fw-bold">apidefinition.yaml</a>.</p>
+              <p class="mb-4">❓ Secure phrases generation is always needed. There are a lot of autonomous applications and services running in the background that need to have rotating passwords.</p>
+              <p class="mb-4">👩‍💻 Using a standard REST API the process of creating passwords can be automated whenever needed. Mobile, web and desktop applications can utilise the API to support the users for such repetitive tasks that need to produce unique and strong output.</p>
+              
+              <!-- Cleanere Link-Karten im GitHub / Terminal Style -->
+              <div class="my-5 d-flex flex-wrap gap-3">
+                <a href="https://github.com/keenthinker/hipstapas.cli" target="_blank" rel="noopener" class="btn btn-dark rounded-3 px-4 py-2 border-0 shadow-sm fs-6">
+                  <i class="fas fa-terminal me-2 text-warning"></i>hipstapas CLI
+                </a>
+                <a href="https://www.npmjs.com/package/hipstapas.core" target="_blank" rel="noopener" class="btn btn-outline-danger rounded-3 px-4 py-2 fs-6">
+                  <i class="fab fa-npm me-2"></i>hipstapas.core
+                </a>
               </div>
-          </div> -->
-          <div class="container">
-              <div class="row">
-                  <div class="col mt-2">
-                  </div>
-                  <div class="col mt-5"></div>
-              </div>
+
+              <p class="mb-4">🌍 A description of the different options can be found on the <a href="/docs" class="text-primary text-decoration-none">documentation</a> page.</p>
+            </div>
+
+            <div class="mt-5 text-center p-3 slick-card-disabled">
+              <img class="img-fluid rounded-3 opacity-90" style="max-height: 400px;" src="/images/hipstapas-infographic-v3.jpg" alt="Features Map"/>
+            </div>
           </div>
+        </div>
+      </div>
+    </section>
   </main>
   
-  <footer class="footer mt-auto py-3">
+  <!-- FOOTER: Dezent im selben Look wie die Navbar -->
+  <footer class="footer mt-auto py-4 bg-body border-top" style="border-color: var(--card-border) !important;">
     <div class="container">
-      <div class="row">
-        <div class="col-sm-12 col-lg">
-          <a href="/privacy" class="link">Privacy</a>
-          <a href="/contact" class="link">Contact</a>
-          <span>✍</span>
-          <a href="https://keenthinker.com" class="link" target="_blank" rel="noopener">keenthinker.com</a>
-          <a href="https://twitter.com/keenthinker" target="_blank" rel="noopener"><span class="link"><i class="fab fa-twitter-square"></i></span></a>
+      <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center gap-3 fs-6">
+        <div class="d-flex gap-4">
+          <a href="/privacy" class="text-muted text-decoration-none opacity-75 hover-opacity-100">Privacy</a>
+          <a href="/contact" class="text-muted text-decoration-none opacity-75 hover-opacity-100">Contact</a>
+        </div>
+        <div class="d-flex align-items-center gap-3 text-muted">
+          <a href="https://keenthinker.com" class="text-muted text-decoration-none" target="_blank" rel="noopener">keenthinker.com</a>
+          <a href="https://twitter.com/keenthinker" class="text-muted fs-5" target="_blank" rel="noopener" aria-label="Twitter">
+            <i class="fab fa-twitter"></i>
+          </a>
         </div>
       </div>
     </div>
   </footer>
-
+  <script src="scripts.js"></script>
 </body>
-  
 </html>

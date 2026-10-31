@@ -1,6 +1,6 @@
 {
   "name": "hipstapas",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "description": "Hipster Password Software as a Service - https://hipstapas.dev",
   "main": "index.js",
   "scripts": {
