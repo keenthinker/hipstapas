@@ -17,7 +17,7 @@ Create secure and unique strings with ease!
 <p>💻Use the service straight from the terminal with the help of the companion app <a href="https://github.com/keenthinker/hipstapas.cli" target="_blank" rel="noopener">hipstapas CLI</a>.</p>
 <p>📦Use the service functionality <b>offline</b> with the help of the npm package <a href="https://www.npmjs.com/package/hipstapas.core" target="_blank" rel="noopener">hipstapas.core</a>.</p>
 <p>🌍A description of the different options can be found  on the <a href="https://hipstapas.dev/docs">documentation</a> page.
-<img class="img-fluid" src="https://hipstapas.dev/images/PasswordAsAService_MindMap_Features.png" />
+<img class="img-fluid" src="https://hipstapas.dev/images/hipstapas-infographic-v3.jpg" />
 </p>
 <br/><br/>
 <h2>Why <span style="border-bottom: 0.1em solid #ff0000;">trust</span> an online service?</h2>
